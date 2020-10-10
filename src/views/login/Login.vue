@@ -46,7 +46,6 @@
 <script>
   // 有关组件相关的
   import MatteMask from "@/components/common/mattemask/MatteMask";
-
   // 有关函数相关的
   import userInfoCheck from "@/network/login"
   export default {
@@ -97,10 +96,8 @@
 </script>
 
 <style scoped>
-
-
   /*整体flex结束*/
-  .login-wrap{
+  .login-wrap {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -109,7 +106,8 @@
     height: 100vh;
     background-color: #666ee8;
   }
-  .login-wrap .login-container{
+
+  .login-wrap .login-container {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
@@ -121,9 +119,8 @@
   }
   /*整体flex布局结束*/
 
-
   /*左上部分心的布局开始*/
-  .topimg{
+  .topimg {
     position: fixed;
     left: 50px;
     top: 50px;
@@ -131,7 +128,8 @@
     height: 60px;
     z-index: 999;
   }
-  .topimg img{
+
+  .topimg img {
     display: inline-block;
     width: 60px;
     height: 60px;
@@ -140,31 +138,29 @@
   }
   /*左上部分心的布局结束*/
 
-
   /*中间内容部分布局开始*/
-  .main{
+  .main {
     width: 100%;
     padding: 70px 50px;
   }
 
-  .left{
+  .left {
     width: 60%;
     height: 100%;
   }
 
-  .left img{
+  .left img {
      width: 100%;
      height: 100%;
    }
 
-  .right{
+  .right {
     position: relative;
     width: 40%;
     height: 100%;
-    /*background-color: yellow;*/
   }
 
-  .right .warp{
+  .right .warp {
     position: absolute;
     width: 90%;
     left: 50%;
@@ -172,16 +168,16 @@
     transform: translate(-50%,-50%);
   }
 
-  .right .title{
+  .right .title {
     font-size: 30px;
     font-weight: 700;
   }
 
-  .right .form-table div{
+  .right .form-table div {
     margin-top: 10px;
   }
 
-  .right .form-table div input{
+  .right .form-table div input {
     width: 75%;
     padding: 14px 30px 14px 50px;
     margin: inherit;
@@ -190,34 +186,40 @@
     background-color: #ffffff;
   }
 
-  .right .form-table .submit input{
+  .right .form-table .submit input {
     width: 75%;
     outline-style: none;
     padding: 14px;
     border-radius: 24px;
     background-color: #666ee8;
     color: #ffffff;
-    cursor:pointer;
+    cursor: pointer;
   }
+
   /*设置样式icon开始*/
-  .username,.password{
+  .username,.password {
     position: relative;
   }
-  #usernameInput:focus{
+
+  #usernameInput:focus {
     border-color: #409EFF;
     outline: 0
   }
-  #passwordInput:focus{
+
+  #passwordInput:focus {
     border-color: #409EFF;
     outline: 0
   }
-  #usernameInput::placeholder{
+
+  #usernameInput::placeholder {
     color: #b4bccc;
   }
-  #passwordInput::placeholder{
+
+  #passwordInput::placeholder {
     color: #b4bccc;
   }
-  .iconfont{
+
+  .iconfont {
     position: absolute;
     left: 10px;
     top: 15px;

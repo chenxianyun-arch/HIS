@@ -12,7 +12,8 @@ Vue.use(VueRouter)
 //3.路由懒加载
 const Home = () => import('../views/home/Home')
 const Login = () => import('../views/login/Login')
-
+const UserManager =() => import('../views/usermanager/UserManager')
+const DoctorManager =() => import('../views/doctor/DoctorManager')
 const route = [
   {
     path: '',
@@ -25,6 +26,14 @@ const route = [
   {
     path: '/login',
     component: Login
+  },
+  {
+    path: '/usermanager',
+    component: UserManager
+  },
+  {
+    path: '/doctormanager',
+    component: DoctorManager
   }
 ]
 
