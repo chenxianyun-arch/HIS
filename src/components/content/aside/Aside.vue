@@ -10,32 +10,13 @@
           <el-submenu index="2">
             <template slot="title"><i class="el-icon-message"></i>医生管理</template>
             <el-menu-item-group>
-              <el-menu-item index="1-1">医生列表</el-menu-item>
-              <el-menu-item index="1-2">医生审核</el-menu-item>
-              <el-menu-item index="1-2">服务审核</el-menu-item>
+              <el-menu-item index="1-1" @click="doctorListHandleClick()">医生列表</el-menu-item>
+              <el-menu-item index="1-2" @click="doctorServiceHandleClick()">医生审核</el-menu-item>
+              <el-menu-item index="1-2" @click="doctorServiceReviewClick()">服务审核</el-menu-item>
             </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-              <el-menu-item index="2-3">选项3</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="2-4">
-              <template slot="title">选项4</template>
-              <el-menu-item index="2-4-1">选项4-1</el-menu-item>
-            </el-submenu>
           </el-submenu>
           <el-submenu index="3">
-            <template slot="title"><i class="el-icon-setting"></i>处方管理</template>
-            <el-menu-item-group>
-              <template slot="title">分组一</template>
-              <el-menu-item index="3-1">选项1</el-menu-item>
-              <el-menu-item index="3-2">选项2</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-              <el-menu-item index="3-3">选项3</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="3-4">
-              <template slot="title">选项4</template>
-              <el-menu-item index="3-4-1">选项4-1</el-menu-item>
-            </el-submenu>
+            <template slot="title"><i class="el-icon-message"></i>处方管理</template>
           </el-submenu>
           <el-submenu index="4">
             <template slot="title"><i class="el-icon-setting"></i>订单管理</template>
@@ -134,10 +115,22 @@
       }
     },
     methods: {
-      // 用户点击跳转到用户列表
-      userHandleClick(){
-        console.log('sss');
-        this.pushUrl = 'usermanager';
+      // 1 用户点击跳转到用户列表
+      userHandleClick() {
+        this.routerUrl = 'usermanager';
+      },
+      // 2 点击跳转到医生列表的列表
+      doctorListHandleClick() {
+        this.routerUrl = 'doctorlist';
+        console.log(this.routerUrl);
+      },
+      // 3 点击跳转到医生服务
+      doctorServiceHandleClick() {
+        this.routerUrl = 'doctorservice'
+      },
+      // 4 点击跳转到医生服务审核
+      doctorServiceReviewClick() {
+        this.routerUrl = 'doctorservicereview'
       }
     }
   }

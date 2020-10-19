@@ -14,6 +14,10 @@ const Home = () => import('../views/home/Home')
 const Login = () => import('../views/login/Login')
 const UserManager =() => import('../views/usermanager/UserManager')
 const DoctorManager =() => import('../views/doctor/DoctorManager')
+const DoctorList =() => import('../views/doctor/doctorlist/DoctorList')
+const DocotorService = () => import('../views/doctor/doctorlist/DoctorService')
+const DocotorServiceReview = () => import('../views/doctor/doctorlist/DoctorServiceReview')
+const PrescriptionManagent = () => import('../views/prescription/PrescriptionManagent')
 const route = [
   {
     path: '',
@@ -34,6 +38,22 @@ const route = [
   {
     path: '/doctormanager',
     component: DoctorManager
+  },
+  {
+    path: '/doctorlist',
+    component: DoctorList
+  },
+  {
+    path: '/doctorservice',
+    component: DocotorService
+  },
+  {
+    path: '/doctorservicereview',
+    component: DocotorServiceReview
+  },
+  {
+    path: '/prescription',
+    component: PrescriptionManagent
   }
 ]
 

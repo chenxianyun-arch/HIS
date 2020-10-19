@@ -138,7 +138,7 @@ export default {
       // 列表数据
       tableData: [{
         date: '2016-05-02',
-        name: '王小虎',
+        name: '李小明',
         time: '2020-7-21',
         phone: '18381911292',
         // 是否开启账号
@@ -152,14 +152,14 @@ export default {
         value: false
       }, {
         date: '2016-05-01',
-        name: '王小虎',
+        name: '黄梅梅',
         time: '2020-7-21',
         phone: '18381911292',
         // 是否开启账号
         value: false
       }, {
         date: '2016-05-03',
-        name: '王小虎',
+        name: '王二丫',
         time: '2020-7-21',
         phone: '18381911292',
         // 是否开启账号
@@ -181,7 +181,16 @@ export default {
     // 复选框选中之后和没有被选中时候发生变化
     handleSelectionChange(val) {
       this.multipleSelection = val;
-      console.log('111')
+      console.log('111');
+    },
+    // 初始页currentPage、初始每页数据数pagesize和数据data
+    handleSizeChange(size) {
+      this.pagesize = size;          // 手动改变页面是多少
+      console.log(this.pagesize);     // 每页下拉显示数据
+    },
+    handleCurrentChange(currentPage) {
+      this.currentPage = currentPage;
+      console.log(this.currentPage); // 点击第几页
     }
   }
 }
