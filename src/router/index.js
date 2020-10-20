@@ -18,6 +18,7 @@ const DoctorList =() => import('../views/doctor/doctorlist/DoctorList')
 const DocotorService = () => import('../views/doctor/doctorlist/DoctorService')
 const DocotorServiceReview = () => import('../views/doctor/doctorlist/DoctorServiceReview')
 const PrescriptionManagent = () => import('../views/prescription/PrescriptionManagent')
+const OrdsQuestionnaire = () => import('../views/ords/Questionnaire')
 const route = [
   {
     path: '',
@@ -54,6 +55,10 @@ const route = [
   {
     path: '/prescription',
     component: PrescriptionManagent
+  },
+  {
+    path: '/questionnaire',
+    component: OrdsQuestionnaire
   }
 ]
 

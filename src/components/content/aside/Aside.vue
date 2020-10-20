@@ -16,22 +16,17 @@
             </el-menu-item-group>
           </el-submenu>
           <el-submenu index="3">
-            <template slot="title"><i class="el-icon-message"></i>处方管理</template>
+            <div slot="title" @click="prescriptHandleClick()"><i class="el-icon-message"></i>处方管理</div>
           </el-submenu>
           <el-submenu index="4">
             <template slot="title"><i class="el-icon-setting"></i>订单管理</template>
             <el-menu-item-group>
-              <template slot="title">分组一</template>
-              <el-menu-item index="3-1">选项1</el-menu-item>
-              <el-menu-item index="3-2">选项2</el-menu-item>
+              <el-menu-item index="1-1" @click="ordsQuestionnaire()">问诊单管理</el-menu-item>
+              <el-menu-item index="1-2" @click="ordsResgister()">挂号单管理</el-menu-item>
+              <el-menu-item index="1-3" @click="ordsDrugs()">药品订单管理</el-menu-item>
+              <el-menu-item index="1-4" @click="ordsPrescriptionReversal()">处方流转订单管理</el-menu-item>
+              <el-menu-item index="1-5" @click="ordsRefund()">退款申请</el-menu-item>
             </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-              <el-menu-item index="3-3">选项3</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="3-4">
-              <template slot="title">选项4</template>
-              <el-menu-item index="3-4-1">选项4-1</el-menu-item>
-            </el-submenu>
           </el-submenu>
           <el-submenu index="5">
             <template slot="title"><i class="el-icon-setting"></i>财务管理</template>
@@ -131,6 +126,30 @@
       // 4 点击跳转到医生服务审核
       doctorServiceReviewClick() {
         this.routerUrl = 'doctorservicereview'
+      },
+      // 5 点击跳转到处方管理
+      prescriptHandleClick() {
+        this.routerUrl = 'prescription'
+      },
+      // 6 点击跳转到问诊单
+      ordsQuestionnaire() {
+        this.routerUrl = 'questionnaire'
+      },
+      // 7 挂号单管理
+      ordsResgister() {
+
+      },
+      // 8 药品订单管理
+      ordsDrugs() {
+
+      },
+      // 9 处方流转订单管理
+      ordsPrescriptionReversal() {
+
+      },
+      // 10 退款申请
+      ordsRefund() {
+
       }
     }
   }

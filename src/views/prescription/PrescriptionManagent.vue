@@ -12,9 +12,13 @@
 export default {
   name: "PrescriptionManagent",
   data() {
+    return {
 
+    }
   },
-  methods: {}
+  methods: {
+
+  }
 }
 </script>
 
