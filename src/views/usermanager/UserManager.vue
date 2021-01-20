@@ -20,9 +20,22 @@
       <div class="select-wrap">
         <!-- 中间的列表盒子 -->
         <div class="select-box">
-          <div><input class="user-account" type="text" placeholder="请输入用户名和账号" /></div>
-          <div><span>注册时间</span>&nbsp; <input type="date" class="register-date"/></div>
-          <div><button class="select-btn">筛选</button></div>
+          <div>
+            <el-input
+              placeholder="请输入姓名/ID号"
+              v-model="elInput"
+              clearable>
+            </el-input></div>
+          <div class="block">
+            <span class="demonstration">选择时间</span>
+            <el-date-picker
+              v-model="value2"
+              type="date"
+              placeholder="选择日期">
+            </el-date-picker>
+          </div>
+          <!-- <div><span>注册时间</span>&nbsp; <input type="date" class="register-date"/></div>-->
+          <div><el-button type="primary" @click="btnClick">筛选</el-button></div>
         </div>
       </div>
     </div>
@@ -131,6 +144,8 @@
 
 <script>
 
+// 引入userAxios 组件
+import userAxios from 'axios';
 export default {
   name: "UserManager",
   data() {
@@ -170,8 +185,13 @@ export default {
       value1: true,   // switch 是否打开
       currentPage: 3, // 当前页码
       pageSize: 10,   // 每页大小
-      total: 10000     // 总页数
+      total: 10000,     // 总页数
+      value2: '',  // 获取筛选时间值
+      elInput: ''
     }
+  },
+  created() {
+    // 1.用户数据请求，满足
   },
   methods: {
     // 点击查看编辑
@@ -191,6 +211,10 @@ export default {
     handleCurrentChange(currentPage) {
       this.currentPage = currentPage;
       console.log(this.currentPage); // 点击第几页
+    },
+    // 点击按钮筛选数据
+    btnClick() {
+      console.log(this.value2,this.elInput);
     }
   }
 }

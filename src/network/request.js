@@ -1,7 +1,6 @@
 /**
  * 发送请求的axios框架配置
  */
-
 import originConst from 'axios'
 
 export default function request(config){
@@ -27,8 +26,8 @@ export default function request(config){
     // console.log("响应拦截处")
     return config
   },error => {
-    console.log(error)
+    console.log(error);
   })
 
-  return instance(config)
+  return instance(config);
 }

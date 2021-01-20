@@ -81,7 +81,7 @@
           })
       },
       setTimeOut1(){
-        setTimeout(()=>{
+        setTimeout(() => {
           this.showToast = false
           this.$router.push('/home')
           this.$toast({text: "登录成功",type: "info", duration: 2000})
