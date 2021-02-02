@@ -8,8 +8,8 @@ import user from "./request";
 export  function deleteAllUser(config) {
   // 传递的字符串数组
   const data = {
-    deleteArray: config.deleteArray
-  }
+    config: config
+  };
   return user({
     method: 'post',
     url: '/deleteAll',
@@ -34,3 +34,32 @@ export function deletSingalUser(config) {
   })
 }
 
+/**
+ * 用户审核的状态开启与否
+ * @param config 用户传递进来的数据
+ * @returns {*} 返回promise对象
+ */
+export function openOrClose(config) {
+  // 保存用户的需要传递到后端的具体数据
+  const data = config
+  return user({
+    method: 'post',
+    url: '/openOrClose',
+    data: data
+  });
+}
+
+/**
+ * 获取到用户的关键字信息发送请求API
+ * @param config
+ * @returns {AxiosPromise}
+ */
+export function getOneUserInfo(config) {
+  // 保存用户的需要传递到后端的具体数据
+  const data = config
+  return user({
+    method: 'post',
+    url: '/getOneUserInfo',
+    data: data
+  });
+}

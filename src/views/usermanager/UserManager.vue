@@ -5,87 +5,90 @@
 @Update: 2020年10月10日23:21:48
 -->
 <template>
- <!-- 用户管理主要内容 -->
- <div class="container">
-   <!-- 主要内容-->
-   <div class="main">
-    <!-- 标题 -->
-    <h2>用户管理</h2>
-    <!-- 筛选列表 -->
-    <div class="select-list">
-      <div class="list-item">
-        <i class="icon-select"><img src="../../assets/usermanager/menu.png" alt="分类图片"></i>
-        <span class="item-info">筛选</span>
-      </div>
-      <div class="select-wrap">
-        <!-- 中间的列表盒子 -->
-        <div class="select-box">
-          <div>
-            <el-input
-              placeholder="请输入姓名/ID号"
-              v-model="elInput"
-              clearable>
-            </el-input></div>
-          <div class="block">
-            <span class="demonstration">选择时间</span>
-            <el-date-picker
-              v-model="value2"
-              type="date"
-              placeholder="选择日期">
-            </el-date-picker>
+  <!-- 用户管理主要内容 -->
+  <div class="container">
+    <!-- 主要内容-->
+    <div class="main">
+      <!-- 标题 -->
+      <h2>用户管理</h2>
+      <!-- 筛选列表 -->
+      <div class="select-list">
+        <div class="list-item">
+          <i class="icon-select"><img src="../../assets/usermanager/menu.png" alt="分类图片"></i>
+          <span class="item-info">筛选</span>
+        </div>
+        <div class="select-wrap">
+          <!-- 中间的列表盒子 -->
+          <div class="select-box">
+            <div>
+              <el-input
+                placeholder="请输入姓名/ID号"
+                v-model="elInput"
+                clearable>
+              </el-input>
+            </div>
+            <div class="block">
+              <span class="demonstration">选择时间</span>
+              <el-date-picker
+                v-model="value2"
+                type="date"
+                placeholder="选择日期">
+              </el-date-picker>
+            </div>
+            <!--           <div><span>注册时间</span>&nbsp; <input type="date" class="register-date"/></div>-->
+            <div>
+              <el-button type="primary" @click="btnClick">筛选</el-button>
+            </div>
           </div>
-<!--           <div><span>注册时间</span>&nbsp; <input type="date" class="register-date"/></div>-->
-          <div><el-button type="primary" @click="btnClick">筛选</el-button></div>
         </div>
       </div>
-    </div>
-    <!-- 用户列表 -->
-    <div class="select-list select-user">
-       <div class="list-item list-reset">
-         <i class="icon-select icon-reset"><img src="../../assets/usermanager/menu.png" alt="分类图片"></i>
-         <span class="item-info">用户列表</span>
-         <div class="message"></div>
-         <div class="qun-message"></div>
-         <div class="app-message"></div>
-       </div>
-       <div class="list-box">
-         <!-- 中间的列表盒子 -->
-         <div class="select-box">
-           <!-- 用户列表区域 -->
-           <div class="table">
-             <el-table
-               ref="multipleTable"
-               :data="tableData"
-               tooltip-effect="dark"
-               style="width: 100%"
-               @selection-change="handleSelectionChange">
-               <el-table-column
-                 type="selection"
-                 width="55">
-               </el-table-column>
-               <el-table-column
-                 prop="name"
-                 label="用户名"
-                 width="180">
-                 <template slot-scope="scope">
-                   <el-popover trigger="hover" placement="top">
-                     <p>用户名: {{ scope.row.name }}</p>
-                     <p>电话: {{ scope.row.address }}</p>
-                     <div slot="reference" class="name-wrapper">
-                       <el-tag size="medium">{{ scope.row.name }}</el-tag>
-                     </div>
-                   </el-popover>
-                 </template>
-               </el-table-column>
-               <el-table-column
-                 width="140"
-                 prop="phone"
-                 label="电话">
-               </el-table-column>
-               <el-table-column
-                 prop="address"
-                 label="账号启用状态"
-                 width="170">
+      <!-- 用户列表 -->
+      <div class="select-list select-user">
+        <div class="list-item list-reset">
+          <i class="icon-select icon-reset"><img src="../../assets/usermanager/menu.png" alt="分类图片"></i>
+          <span class="item-info">用户列表</span>
+          <div class="message"></div>
+          <div class="qun-message"></div>
+          <div class="app-message"></div>
+        </div>
+        <div class="list-box">
+          <!-- 中间的列表盒子 -->
+          <div class="select-box">
+            <!-- 用户列表区域 -->
+            <div class="table">
+              <el-table
+                ref="multipleTable"
+                :data="tableData"
+                tooltip-effect="dark"
+                style="width: 100%"
+                @selection-change="handleSelectionChange">
+                <el-table-column
+                  type="selection"
+                  width="55">
+                </el-table-column>
+                <el-table-column
+                  prop="name"
+                  label="用户名"
+                  width="180">
+                  <template slot-scope="scope">
+                    <el-popover trigger="hover" placement="top">
+                      <p>用户名: {{ scope.row.name }}</p>
+                      <p>电话: {{ scope.row.address }}</p>
+                      <div slot="reference" class="name-wrapper">
+                        <el-tag size="medium">{{ scope.row.name }}</el-tag>
+                      </div>
+                    </el-popover>
+                  </template>
+                </el-table-column>
+                <el-table-column
+                  width="140"
+                  prop="phone"
+                  label="电话">
+                </el-table-column>
+                <el-table-column
+                  prop="address"
+                  label="账号启用状态"
+                  width="170">
                   <template slot-scope="scope">
                     <el-switch
                       style="display: block"
@@ -96,56 +99,57 @@
                       @change="switchChange(scope.row)">
                     </el-switch>
                   </template>
-               </el-table-column>
-               <el-table-column
-                 prop="time"
-                 label="加入时间"
-                 width="170">
-               </el-table-column>
-               <el-table-column
-                 width=""
-                 prop="address"
-                 label="操作">
-                 <template slot-scope="scope">
-                   <div style="display: flex; justify-content: space-between; flex-wrap: nowrap;">
-                     <el-button @click="handleClick(scope.row)" type="text" size="medium">查看档案</el-button>
-                     <el-button type="text" size="medium">查看收货地址</el-button>
-                     <el-button type="text" size="medium" @click="deletSingalClick(scope.row.userId)">删除</el-button>
-                   </div>
-                 </template>
-               </el-table-column>
-             </el-table>
-           </div>
-         </div>
-         <!-- 底部的删除全部按钮和分页插件 -->
-         <div class="page-plugin">
-           <!-- 删除全部 -->
-           <div class="deleteall" style="position: relative; right: 0; height: 50px;">
-             <el-button style="float: left; margin-top: 10px;" @click="deletClick">删除全部</el-button>
-           </div>
-           <!-- 分页插件 -->
-           <div style="display: flex; justify-content: center;">
-             <el-pagination
-               background
-               @size-change="handleSizeChange"
-               @current-change="handleCurrentChange"
-               :current-page="currentPage"
-               :page-sizes="[10, 20, 30, 100]"
-               :page-size="pageSize"
-               layout="total, sizes, prev, pager, next, jumper"
-               :total="total">
-             </el-pagination>
-           </div>
-         </div>
-       </div>
-     </div>
-   </div>
- </div>
+                </el-table-column>
+                <el-table-column
+                  prop="time"
+                  label="加入时间"
+                  width="170">
+                </el-table-column>
+                <el-table-column
+                  width=""
+                  prop="address"
+                  label="操作">
+                  <template slot-scope="scope">
+                    <div style="display: flex; justify-content: space-between; flex-wrap: nowrap;">
+                      <el-button @click="handleClick(scope.row)" type="text" size="medium">查看档案</el-button>
+                      <el-button type="text" size="medium">查看收货地址</el-button>
+                      <el-button type="text" size="medium" @click="deletSingalClick(scope.row.userId)">删除</el-button>
+                    </div>
+                  </template>
+                </el-table-column>
+              </el-table>
+            </div>
+          </div>
+          <!-- 底部的删除全部按钮和分页插件 -->
+          <div class="page-plugin">
+            <!-- 删除全部 -->
+            <div class="deleteall" style="position: relative; right: 0; height: 50px;">
+              <el-button style="float: left; margin-top: 10px;" @click="deletClick">删除全部</el-button>
+            </div>
+            <!-- 分页插件 -->
+            <div style="display: flex; justify-content: center;">
+              <el-pagination
+                background
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage"
+                :page-sizes="[10, 20, 30, 100]"
+                :page-size="pageSize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="total">
+              </el-pagination>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 // 导入删除用户的删除信息接口
-import {deleteAllUser,deletSingalUser} from "@/network/user";
+import {deleteAllUser, deletSingalUser, openOrClose, getOneUserInfo} from "@/network/user";
+
 export default {
   name: "UserManager",
   data() {
@@ -207,7 +211,7 @@ export default {
       // 1 装选中的Id
       let selectId = [];
       // 2 循环添加对应的Id号
-      for(let index = 0; index<val.length; index++) {
+      for (let index = 0; index < val.length; index++) {
         selectId.push(val[index].userId);
       }
       // 3 将循环得到得Id值进行赋值
@@ -218,38 +222,50 @@ export default {
     },
     // 点击按钮筛选数据
     btnClick() {
+      // 将信息装入数组中，然后传给后端
+      let keywords = [this.elInput,Date.parse(this.value2)];
       // 1 打印输入框里和
       console.log(this.elInput);
-      // 选定的时间
       console.log(Date.parse(this.value2));
+      // 请求数据API
+      getOneUserInfo(keywords).then((res) => {
+        console.log(res);
+        this.$toast({text: "请稍等...",type: "info", duration: 2000})
+      }).catch(err => {
+        console.log(err);
+      })
       // 2 在这里发起请求
       // 3 得到数据
       // 4 数据进行赋值
       // 5 前端进行展示数据
     },
     // switch开关单独开与关的状态触发
-    switchChange (value){
-      console.log(value)
+    switchChange(value) {
+      console.log("----")
+      console.log(value);
+      openOrClose(value).then((res) => {
+        console.log(res);
+      }).catch((err) => {
+        console.log(err);
+      })
     },
     // 删除按钮弹出模态框提示删除全部吗
     deletClick() {
-      this.$confirm(`确定要删除`,'提示',{
+      this.$confirm(`确定要删除`, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(() =>{
+      }).then(() => {
         console.log('点击确认');
         // 1 点击确定后发送需要删除的信息到后端
-        deleteAllUser({
-          deleteArray: JSON.stringify(this.multipleSelection)
-        }).then((data) => {
+        deleteAllUser(this.multipleSelection).then((data) => {
           this.$message({
             message: '删除成功！',
             type: 'success',
             duration: 4000
           });
           console.log(data);
-        }).catch(() =>{
+        }).catch(() => {
           console.log('点击了取消');
           this.$message({
             message: '取消删除！',
@@ -257,11 +273,11 @@ export default {
             duration: 4000
           })
         })
-        })
+      })
     },
     // 删除单个用户数据
     deletSingalClick(userId) {
-      this.$confirm('确定要删除这条数据吗？','删除数据',{
+      this.$confirm('确定要删除这条数据吗？', '删除数据', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -274,7 +290,7 @@ export default {
         }).catch(error => {
           console.log(error);
         })
-      }).catch(err =>{
+      }).catch(err => {
         // 打印错误信息
         console.log(err);
       })
@@ -296,25 +312,25 @@ export default {
 <style scoped>
 
 .container {
- width: 100%;
- height: 100vh;
+  width: 100%;
+  height: 100vh;
 }
 
 .container .main {
- overflow-x: hidden;
- padding: 10px;
- width: inherit;
- height: 100%;
+  overflow-x: hidden;
+  padding: 10px;
+  width: inherit;
+  height: 100%;
 }
 
-.container .main .select-list{
+.container .main .select-list {
   margin-top: 5px;
   width: 100%;
   height: 20%;
   border: 1px solid #dcdfe6;
 }
 
-.container .main .table{
+.container .main .table {
   width: 100%;
 }
 
@@ -322,7 +338,6 @@ export default {
   width: 100%;
   height: 80%;
 }
-
 
 
 .container .main .select-list .list-item {
@@ -388,12 +403,9 @@ export default {
   cursor: pointer;
 }
 
-.container .main .select-list .icon-select img{
+.container .main .select-list .icon-select img {
   top: 10%;
 }
-
-
-
 
 
 </style>

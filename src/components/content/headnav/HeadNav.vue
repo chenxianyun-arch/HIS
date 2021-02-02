@@ -1,7 +1,7 @@
 <template>
   <div class="head-nav">
     <div class="header-wrapper">
-      <h1 class="title" title="互联网医疗服务后台管理">互联网医疗服务后台管理</h1>
+      <h1 class="title" title="互联网医疗服务后台管理">基于SpringBoot技术医院诊疗管理系统</h1>
       <div class="info">
         <div @click="adminClick">
           <i class="iconfont icon-yonghuming"></i>
