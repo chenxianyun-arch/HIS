@@ -34,7 +34,7 @@
               placeholder="选择日期">
             </el-date-picker>
           </div>
-          <!-- <div><span>注册时间</span>&nbsp; <input type="date" class="register-date"/></div>-->
+<!--           <div><span>注册时间</span>&nbsp; <input type="date" class="register-date"/></div>-->
           <div><el-button type="primary" @click="btnClick">筛选</el-button></div>
         </div>
       </div>
@@ -89,10 +89,11 @@
                   <template slot-scope="scope">
                     <el-switch
                       style="display: block"
-                      v-model="value1"
+                      v-model="scope.row.value"
                       active-color="#13ce66"
-                      active-text="开始"
-                      inactive-text="关闭">
+                      active-text="审核"
+                      inactive-text="关闭"
+                      @change="switchChange(scope.row)">
                     </el-switch>
                   </template>
                </el-table-column>
@@ -109,7 +110,7 @@
                    <div style="display: flex; justify-content: space-between; flex-wrap: nowrap;">
                      <el-button @click="handleClick(scope.row)" type="text" size="medium">查看档案</el-button>
                      <el-button type="text" size="medium">查看收货地址</el-button>
-                     <el-button type="text" size="medium">删除</el-button>
+                     <el-button type="text" size="medium" @click="deletSingalClick(scope.row.userId)">删除</el-button>
                    </div>
                  </template>
                </el-table-column>
@@ -120,7 +121,7 @@
          <div class="page-plugin">
            <!-- 删除全部 -->
            <div class="deleteall" style="position: relative; right: 0; height: 50px;">
-             <el-button style="float: right; margin-top: 10px;">删除全部</el-button>
+             <el-button style="float: left; margin-top: 10px;" @click="deletClick">删除全部</el-button>
            </div>
            <!-- 分页插件 -->
            <div style="display: flex; justify-content: center;">
@@ -143,15 +144,15 @@
 </template>
 
 <script>
-
-// 引入userAxios 组件
-import userAxios from 'axios';
+// 导入删除用户的删除信息接口
+import {deleteAllUser,deletSingalUser} from "@/network/user";
 export default {
   name: "UserManager",
   data() {
     return {
       // 列表数据
       tableData: [{
+        userId: 3,
         date: '2016-05-02',
         name: '李小明',
         time: '2020-7-21',
@@ -159,6 +160,7 @@ export default {
         // 是否开启账号
         value: false
       }, {
+        userId: 2,
         date: '2016-05-04',
         name: '王小虎',
         time: '2020-7-21',
@@ -166,6 +168,7 @@ export default {
         // 是否开启账号
         value: false
       }, {
+        userId: 6,
         date: '2016-05-01',
         name: '黄梅梅',
         time: '2020-7-21',
@@ -173,16 +176,16 @@ export default {
         // 是否开启账号
         value: false
       }, {
+        userId: 4,
         date: '2016-05-03',
         name: '王二丫',
         time: '2020-7-21',
         phone: '18381911292',
         // 是否开启账号
-        value: false
+        value: true
       }],
       // 多选所要用到的数组
       multipleSelection: [], // 多选中后的数据是那些
-      value1: true,   // switch 是否打开
       currentPage: 3, // 当前页码
       pageSize: 10,   // 每页大小
       total: 10000,     // 总页数
@@ -197,11 +200,84 @@ export default {
     // 点击查看编辑
     handleClick(row) {
       console.log(row);
+      // deleteUserInfo(this.deletSingalClick())
     },
     // 复选框选中之后和没有被选中时候发生变化
     handleSelectionChange(val) {
-      this.multipleSelection = val;
-      console.log('111');
+      // 1 装选中的Id
+      let selectId = [];
+      // 2 循环添加对应的Id号
+      for(let index = 0; index<val.length; index++) {
+        selectId.push(val[index].userId);
+      }
+      // 3 将循环得到得Id值进行赋值
+      this.multipleSelection = selectId;
+      // console.log('111');
+      console.log(this.multipleSelection);
+      console.log(selectId);
+    },
+    // 点击按钮筛选数据
+    btnClick() {
+      // 1 打印输入框里和
+      console.log(this.elInput);
+      // 选定的时间
+      console.log(Date.parse(this.value2));
+      // 2 在这里发起请求
+      // 3 得到数据
+      // 4 数据进行赋值
+      // 5 前端进行展示数据
+    },
+    // switch开关单独开与关的状态触发
+    switchChange (value){
+      console.log(value)
+    },
+    // 删除按钮弹出模态框提示删除全部吗
+    deletClick() {
+      this.$confirm(`确定要删除`,'提示',{
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() =>{
+        console.log('点击确认');
+        // 1 点击确定后发送需要删除的信息到后端
+        deleteAllUser({
+          deleteArray: JSON.stringify(this.multipleSelection)
+        }).then((data) => {
+          this.$message({
+            message: '删除成功！',
+            type: 'success',
+            duration: 4000
+          });
+          console.log(data);
+        }).catch(() =>{
+          console.log('点击了取消');
+          this.$message({
+            message: '取消删除！',
+            type: 'info',
+            duration: 4000
+          })
+        })
+        })
+    },
+    // 删除单个用户数据
+    deletSingalClick(userId) {
+      this.$confirm('确定要删除这条数据吗？','删除数据',{
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        // 传递数据到后端
+        deletSingalUser({
+          deleteId: userId
+        }).then(data => {
+          console.log(data);
+        }).catch(error => {
+          console.log(error);
+        })
+      }).catch(err =>{
+        // 打印错误信息
+        console.log(err);
+      })
     },
     // 初始页currentPage、初始每页数据数pagesize和数据data
     handleSizeChange(size) {
@@ -211,10 +287,6 @@ export default {
     handleCurrentChange(currentPage) {
       this.currentPage = currentPage;
       console.log(this.currentPage); // 点击第几页
-    },
-    // 点击按钮筛选数据
-    btnClick() {
-      console.log(this.value2,this.elInput);
     }
   }
 }
