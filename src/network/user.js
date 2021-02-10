@@ -1,5 +1,6 @@
 import user from "./request";
 
+
 /**
  * 删除批量数据
  * @param config 返回配置参数
@@ -56,10 +57,24 @@ export function openOrClose(config) {
  */
 export function getOneUserInfo(config) {
   // 保存用户的需要传递到后端的具体数据
-  const data = config
+  const data = config;
   return user({
     method: 'post',
     url: '/getOneUserInfo',
+    data: data
+  });
+}
+
+/**
+ * 获取user的全部信息
+ * @returns {AxiosPromise} promise对象
+ */
+export function getAllUserInfo(config) {
+  // 保存用户的需要传递到后端的具体数据
+  const data = config;
+  return user({
+    method: 'post',
+    url: '/getAllUserInfo',
     data: data
   });
 }

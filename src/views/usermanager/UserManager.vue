@@ -4,6 +4,7 @@
 @Author: chenxy
 @Update: 2020年10月10日23:21:48
 -->
+
 <template>
   <!-- 用户管理主要内容 -->
   <div class="container">
@@ -14,7 +15,9 @@
       <!-- 筛选列表 -->
       <div class="select-list">
         <div class="list-item">
-          <i class="icon-select"><img src="../../assets/usermanager/menu.png" alt="分类图片"></i>
+          <i class="icon-select">
+            <img src="../../assets/usermanager/menu.png" alt="分类图片"/>
+          </i>
           <span class="item-info">筛选</span>
         </div>
         <div class="select-wrap">
@@ -24,7 +27,8 @@
               <el-input
                 placeholder="请输入姓名/ID号"
                 v-model="elInput"
-                clearable>
+                clearable
+              >
               </el-input>
             </div>
             <div class="block">
@@ -32,7 +36,8 @@
               <el-date-picker
                 v-model="value2"
                 type="date"
-                placeholder="选择日期">
+                placeholder="选择日期"
+              >
               </el-date-picker>
             </div>
             <!--           <div><span>注册时间</span>&nbsp; <input type="date" class="register-date"/></div>-->
@@ -45,7 +50,9 @@
       <!-- 用户列表 -->
       <div class="select-list select-user">
         <div class="list-item list-reset">
-          <i class="icon-select icon-reset"><img src="../../assets/usermanager/menu.png" alt="分类图片"></i>
+          <i class="icon-select icon-reset"
+            ><img src="../../assets/usermanager/menu.png" alt="分类图片"
+          /></i>
           <span class="item-info">用户列表</span>
           <div class="message"></div>
           <div class="qun-message"></div>
@@ -61,15 +68,10 @@
                 :data="tableData"
                 tooltip-effect="dark"
                 style="width: 100%"
-                @selection-change="handleSelectionChange">
-                <el-table-column
-                  type="selection"
-                  width="55">
-                </el-table-column>
-                <el-table-column
-                  prop="name"
-                  label="用户名"
-                  width="180">
+                @selection-change="handleSelectionChange"
+              >
+                <el-table-column type="selection" width="55"> </el-table-column>
+                <el-table-column prop="name" label="用户名" width="180">
                   <template slot-scope="scope">
                     <el-popover trigger="hover" placement="top">
                       <p>用户名: {{ scope.row.name }}</p>
@@ -80,15 +82,13 @@
                     </el-popover>
                   </template>
                 </el-table-column>
-                <el-table-column
-                  width="140"
-                  prop="phone"
-                  label="电话">
+                <el-table-column width="140" prop="phone" label="电话">
                 </el-table-column>
                 <el-table-column
                   prop="address"
                   label="账号启用状态"
-                  width="170">
+                  width="170"
+                >
                   <template slot-scope="scope">
                     <el-switch
                       style="display: block"
@@ -96,24 +96,37 @@
                       active-color="#13ce66"
                       active-text="审核"
                       inactive-text="关闭"
-                      @change="switchChange(scope.row)">
+                      @change="switchChange(scope.row)"
+                    >
                     </el-switch>
                   </template>
                 </el-table-column>
-                <el-table-column
-                  prop="time"
-                  label="加入时间"
-                  width="170">
+                <el-table-column prop="time" label="加入时间" width="170">
                 </el-table-column>
-                <el-table-column
-                  width=""
-                  prop="address"
-                  label="操作">
+                <el-table-column width="" prop="address" label="操作">
                   <template slot-scope="scope">
-                    <div style="display: flex; justify-content: space-between; flex-wrap: nowrap;">
-                      <el-button @click="handleClick(scope.row)" type="text" size="medium">查看档案</el-button>
-                      <el-button type="text" size="medium">查看收货地址</el-button>
-                      <el-button type="text" size="medium" @click="deletSingalClick(scope.row.userId)">删除</el-button>
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        flex-wrap: nowrap;
+                      "
+                    >
+                      <el-button
+                        @click="handleClick(scope.row)"
+                        type="text"
+                        size="medium"
+                        >查看档案</el-button
+                      >
+                      <el-button type="text" size="medium"
+                        >查看收货地址</el-button
+                      >
+                      <el-button
+                        type="text"
+                        size="medium"
+                        @click="deletSingalClick(scope.row.userId)"
+                        >删除</el-button
+                      >
                     </div>
                   </template>
                 </el-table-column>
@@ -123,20 +136,28 @@
           <!-- 底部的删除全部按钮和分页插件 -->
           <div class="page-plugin">
             <!-- 删除全部 -->
-            <div class="deleteall" style="position: relative; right: 0; height: 50px;">
-              <el-button style="float: left; margin-top: 10px;" @click="deletClick">删除全部</el-button>
+            <div
+              class="deleteall"
+              style="position: relative; right: 0; height: 50px"
+            >
+              <el-button
+                style="float: left; margin-top: 10px"
+                @click="deletClick"
+                >删除全部</el-button
+              >
             </div>
             <!-- 分页插件 -->
-            <div style="display: flex; justify-content: center;">
+            <div style="display: flex; justify-content: center">
               <el-pagination
                 background
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
                 :current-page="currentPage"
-                :page-sizes="[10, 20, 30, 100]"
+                :page-sizes="[10, 15, 20, 25]"
                 :page-size="pageSize"
                 layout="total, sizes, prev, pager, next, jumper"
-                :total="total">
+                :total="total"
+              >
               </el-pagination>
             </div>
           </div>
@@ -148,57 +169,77 @@
 
 <script>
 // 导入删除用户的删除信息接口
-import {deleteAllUser, deletSingalUser, openOrClose, getOneUserInfo} from "@/network/user";
+import {
+  deleteAllUser,
+  deletSingalUser,
+  openOrClose,
+  getOneUserInfo,
+  getAllUserInfo
+} from "@/network/user";
 
 export default {
   name: "UserManager",
   data() {
     return {
       // 列表数据
-      tableData: [{
-        userId: 3,
-        date: '2016-05-02',
-        name: '李小明',
-        time: '2020-7-21',
-        phone: '18381911292',
-        // 是否开启账号
-        value: false
-      }, {
-        userId: 2,
-        date: '2016-05-04',
-        name: '王小虎',
-        time: '2020-7-21',
-        phone: '18381911292',
-        // 是否开启账号
-        value: false
-      }, {
-        userId: 6,
-        date: '2016-05-01',
-        name: '黄梅梅',
-        time: '2020-7-21',
-        phone: '18381911292',
-        // 是否开启账号
-        value: false
-      }, {
-        userId: 4,
-        date: '2016-05-03',
-        name: '王二丫',
-        time: '2020-7-21',
-        phone: '18381911292',
-        // 是否开启账号
-        value: true
-      }],
+      tableData: [
+        {
+          userId: 3,
+          date: "2016-05-02",
+          name: "李小明",
+          time: "2020-7-21",
+          phone: "18381911292",
+          // 是否开启账号
+          value: false,
+        },
+        {
+          userId: 2,
+          date: "2016-05-04",
+          name: "王小虎",
+          time: "2020-7-21",
+          phone: "18381911292",
+          // 是否开启账号
+          value: false,
+        },
+        {
+          userId: 6,
+          date: "2016-05-01",
+          name: "黄梅梅",
+          time: "2020-7-21",
+          phone: "18381911292",
+          // 是否开启账号
+          value: false,
+        },
+        {
+          userId: 4,
+          date: "2016-05-03",
+          name: "王二丫",
+          time: "2020-7-21",
+          phone: "18381911292",
+          // 是否开启账号
+          value: true,
+        },
+      ],
       // 多选所要用到的数组
       multipleSelection: [], // 多选中后的数据是那些
-      currentPage: 3, // 当前页码
-      pageSize: 10,   // 每页大小
-      total: 10000,     // 总页数
-      value2: '',  // 获取筛选时间值
-      elInput: ''
-    }
+      currentPage: 1, // 当前页码
+      pageSize: 10, // 每页大小
+      total: 5, // 总页数
+      value2: "", // 获取筛选时间值
+      elInput: "", // 获取关键值
+    };
   },
   created() {
     // 1.用户数据请求，满足
+    getAllUserInfo({
+      currentPage: this.currentPage,
+      pageSize: this.pageSize
+    }).then(res => {
+      console.log(res);
+      this.tableData = res.data;
+    }).catch(err => {
+      console.log(err);
+    })
   },
   methods: {
     // 点击查看编辑
@@ -223,17 +264,32 @@ export default {
     // 点击按钮筛选数据
     btnClick() {
       // 将信息装入数组中，然后传给后端
-      let keywords = [this.elInput,Date.parse(this.value2)];
-      // 1 打印输入框里和
-      console.log(this.elInput);
-      console.log(Date.parse(this.value2));
+      let keywords = {
+       'keyName': this.elInput,
+       'keyDate': Date.parse(this.value2)
+      };
+      console.log(keywords);
       // 请求数据API
-      getOneUserInfo(keywords).then((res) => {
-        console.log(res);
-        this.$toast({text: "请稍等...",type: "info", duration: 2000})
-      }).catch(err => {
-        console.log(err);
-      })
+      getOneUserInfo(keywords)
+        .then((res) => {
+          if(res.data[0] === null) {
+            this.$toast({ text: "请稍等...", type: "info", duration: 2000 });
+            setTimeout(() => {
+              this.$toast({text: '信息为空!', type: 'danger', duration: 2000});
+              this.tableData = [];
+            },2000)
+          }else{
+            console.log(res.data);
+            this.$toast({ text: "请稍等...", type: "info", duration: 2000 });
+            setTimeout(() => {
+              this.tableData = res.data;
+              this.$toast({text: '查询成功!', type: 'info', duration: 2000});
+            }, 2000);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       // 2 在这里发起请求
       // 3 得到数据
       // 4 数据进行赋值
@@ -241,76 +297,92 @@ export default {
     },
     // switch开关单独开与关的状态触发
     switchChange(value) {
-      console.log("----")
+      console.log("----");
       console.log(value);
-      openOrClose(value).then((res) => {
-        console.log(res);
-      }).catch((err) => {
-        console.log(err);
-      })
+      openOrClose(value)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     // 删除按钮弹出模态框提示删除全部吗
     deletClick() {
-      this.$confirm(`确定要删除`, '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
+      this.$confirm(`确定要删除`, "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
       }).then(() => {
-        console.log('点击确认');
+        console.log("点击确认");
         // 1 点击确定后发送需要删除的信息到后端
-        deleteAllUser(this.multipleSelection).then((data) => {
-          this.$message({
-            message: '删除成功！',
-            type: 'success',
-            duration: 4000
-          });
-          console.log(data);
-        }).catch(() => {
-          console.log('点击了取消');
-          this.$message({
-            message: '取消删除！',
-            type: 'info',
-            duration: 4000
+        deleteAllUser(this.multipleSelection)
+          .then((data) => {
+            this.$message({
+              message: "删除成功！",
+              type: "success",
+              duration: 4000,
+            });
+            console.log(data);
           })
-        })
-      })
+          .catch(() => {
+            console.log("点击了取消");
+            this.$message({
+              message: "取消删除！",
+              type: "info",
+              duration: 4000,
+            });
+          });
+      });
     },
     // 删除单个用户数据
     deletSingalClick(userId) {
-      this.$confirm('确定要删除这条数据吗？', '删除数据', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        // 传递数据到后端
-        deletSingalUser({
-          deleteId: userId
-        }).then(data => {
-          console.log(data);
-        }).catch(error => {
-          console.log(error);
-        })
-      }).catch(err => {
-        // 打印错误信息
-        console.log(err);
+      this.$confirm("确定要删除这条数据吗？", "删除数据", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
       })
+        .then(() => {
+          // 传递数据到后端
+          deletSingalUser({
+            deleteId: userId,
+          })
+            .then((data) => {
+              console.log(data);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        })
+        .catch((err) => {
+          // 打印错误信息
+          console.log(err);
+        });
     },
     // 初始页currentPage、初始每页数据数pagesize和数据data
     handleSizeChange(size) {
-      this.pagesize = size;          // 手动改变页面是多少
-      console.log(this.pagesize);     // 每页下拉显示数据
+      this.getSuccessInfo(size,this.currentPage);
+      console.log(size); // 每页下拉显示数据
     },
     handleCurrentChange(currentPage) {
-      this.currentPage = currentPage;
-      console.log(this.currentPage); // 点击第几页
+      console.log(currentPage); // 点击第几页
+      this.getSuccessInfo(this.pageSize,currentPage)
+    },
+    getSuccessInfo(size,currentPage){
+      const data = {pageSize: size, currentPage: currentPage};
+      getAllUserInfo(data).then(res => {
+        console.log(res);
+        this.tableData = res.data.userList;
+        this.total = res.data.pageLength;
+      }).catch(err => {
+        console.log(err);
+      })
     }
-  }
-}
-
+  },
+};
 </script>
 
 <style scoped>
-
 .container {
   width: 100%;
   height: 100vh;
@@ -338,7 +410,6 @@ export default {
   width: 100%;
   height: 80%;
 }
-
 
 .container .main .select-list .list-item {
   height: 30px;
@@ -406,6 +477,4 @@ export default {
 .container .main .select-list .icon-select img {
   top: 10%;
 }
-
-
 </style>
