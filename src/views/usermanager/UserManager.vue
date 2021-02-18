@@ -143,7 +143,7 @@
               <el-button
                 style="float: left; margin-top: 10px"
                 @click="deletClick"
-                >删除全部</el-button
+                >删除已选</el-button
               >
             </div>
             <!-- 分页插件 -->
@@ -222,9 +222,9 @@ export default {
       ],
       // 多选所要用到的数组
       multipleSelection: [], // 多选中后的数据是那些
-      currentPage: 1, // 当前页码
+      currentPage: 6, // 当前页码
       pageSize: 10, // 每页大小
-      total: 5, // 总页数
+      total: 10, // 总页数
       value2: "", // 获取筛选时间值
       elInput: "", // 获取关键值
     };
@@ -236,7 +236,8 @@ export default {
       pageSize: this.pageSize
     }).then(res => {
       console.log(res);
-      this.tableData = res.data;
+      this.tableData = res.data.userList;
+      this.total = res.data.pageLength;
     }).catch(err => {
       console.log(err);
     })
@@ -301,7 +302,11 @@ export default {
       console.log(value);
       openOrClose(value)
         .then((res) => {
-          console.log(res);
+          this.$message({
+            message: "操作成功！",
+            type: "success",
+            duration: 4000,
+          });
         })
         .catch((err) => {
           console.log(err);
@@ -317,13 +322,13 @@ export default {
         console.log("点击确认");
         // 1 点击确定后发送需要删除的信息到后端
         deleteAllUser(this.multipleSelection)
-          .then((data) => {
+          .then((res) => {
             this.$message({
               message: "删除成功！",
               type: "success",
               duration: 4000,
             });
-            console.log(data);
+            console.log(res);
           })
           .catch(() => {
             console.log("点击了取消");
@@ -349,6 +354,11 @@ export default {
           })
             .then((data) => {
               console.log(data);
+              this.$message({
+                message: "删除成功！",
+                type: "success",
+                duration: 4000,
+              })
             })
             .catch((error) => {
               console.log(error);
@@ -366,9 +376,10 @@ export default {
     },
     handleCurrentChange(currentPage) {
       console.log(currentPage); // 点击第几页
-      this.getSuccessInfo(this.pageSize,currentPage)
+      this.getSuccessInfo(this.pageSize,currentPage);
     },
     getSuccessInfo(size,currentPage){
+      console.log(currentPage);
       const data = {pageSize: size, currentPage: currentPage};
       getAllUserInfo(data).then(res => {
         console.log(res);
@@ -391,6 +402,7 @@ export default {
 .container .main {
   overflow-x: hidden;
   padding: 10px;
+  margin-right: 20px;
   width: inherit;
   height: 100%;
 }
@@ -476,5 +488,6 @@ export default {
 
 .container .main .select-list .icon-select img {
   top: 10%;
+  margin-left: 10px;
 }
 </style>
