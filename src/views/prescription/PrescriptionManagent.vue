@@ -82,26 +82,26 @@
                 @selection-change="handleSelectionChange"
               >
                 <el-table-column type="selection" width="55"> </el-table-column>
-                <el-table-column prop="doctorName" label="处方编号" width="100">
+                <el-table-column prop="patientId" label="处方编号" width="100">
                   <template slot-scope="scope">
                     <el-popover trigger="hover" placement="top">
-                      <p>用户名: {{ scope.row.doctorName }}</p>
-                      <p>电话: {{ scope.row.doctorTel }}</p>
+                      <p>用户名: {{ scope.row.patientName }}</p>
+                      <p>电话: {{ scope.row.patientName }}</p>
                       <div slot="reference" class="name-wrapper">
-                        <el-tag size="medium">{{ scope.row.doctorName }}</el-tag>
+                        <el-tag size="medium">{{ scope.row.patientName }}</el-tag>
                       </div>
                     </el-popover>
                   </template>
                 </el-table-column>
-                <el-table-column width="120" prop="doctorTel" label="患者">
+                <el-table-column width="120" prop="patientName" label="患者">
                 </el-table-column>
-                <el-table-column width="120" prop="doctorHospital" label="科室">
+                <el-table-column width="120" prop="patientKeshi" label="科室">
                 </el-table-column>
-                <el-table-column width="130" prop="doctorKeshi" label="医生">
+                <el-table-column width="130" prop="patientDoctor" label="医生">
                 </el-table-column>
-                <el-table-column width="130" prop="doctorZhiceng" label="费用">
+                <el-table-column width="130" prop="patientPrice" label="费用">
                 </el-table-column>
-                <el-table-column width="130" prop="doctorAddtime" label="处方订单状态">
+                <el-table-column width="130" prop="patientState" label="处方订单状态">
                 </el-table-column>
                 <el-table-column width="" prop="address" label="操作">
                   <template slot-scope="scope">
@@ -117,13 +117,10 @@
                         type="text"
                         size="medium">查看</el-button
                       >
-                      <el-button type="text" size="medium"
-                      >查看粉丝</el-button
-                      >
                       <el-button
                         type="text"
                         size="medium"
-                        @click="deletSingalClick(scope.row.doctorId)"
+                        @click="deletSingalClick(scope.row.patientId)"
                       >删除</el-button
                       >
                     </div>
@@ -172,7 +169,7 @@ import {
   deletSingalDoctor,
   getOneDoctorInfo,
   getAllDoctorInfo
-} from "@/network/doctor";
+} from "@/network/patient";
 
 export default {
   name: "PrescriptionManagent",
@@ -181,16 +178,11 @@ export default {
       // 列表数据
       tableData: [
         {
-          doctorId: 1,
-          doctorName: "钟南山",
-          doctorTel: "18381911292",
-          doctorHospital: "万源市第三医院",
-          doctorKeshi: "儿科",
-          doctorZhiceng: "高级医生",
-          doctorAddtime: "2021-01-01",
-          doctorStatus: "审核通过",
-          doctorServiceStatus: "服务通过",
-          doctorFansnumber: 12
+          patientId: 1,
+          patientName: "钟南山",
+          patientKeshi: "儿科",
+          patientPrice: "100",
+          patientState: "审核通过"
         }
       ],
       // 多选所要用到的数组
@@ -220,7 +212,6 @@ export default {
     // 点击查看编辑
     handleClick(row) {
       console.log(row);
-      // deleteUserInfo(this.deletSingalClick())
     },
     // 复选框选中之后和没有被选中时候发生变化
     handleSelectionChange(val) {
@@ -229,7 +220,7 @@ export default {
       let selectId = [];
       // 2 循环添加对应的Id号
       for (let index = 0; index < val.length; index++) {
-        selectId.push(val[index].doctorId);
+        selectId.push(val[index].patientId);
       }
       // 3 将循环得到得Id值进行赋值
       this.multipleSelection = selectId;
@@ -242,8 +233,8 @@ export default {
       // 将信息装入数组中，然后传给后端
       let keywords = {
         'keyName': this.elInput,
-        'startDate': this.startDate,
-        'endDate': this.endDate
+        'startDate': Date.parse(this.startDate),
+        'endDate': Date.parse(this.endDate)
       };
       console.log(keywords);
       // 请求数据API
