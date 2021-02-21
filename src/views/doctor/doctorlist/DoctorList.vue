@@ -44,7 +44,7 @@
             </div>
             <!-- 职称 -->
             <div class="block">
-              <el-select v-model="valueZhiCeng" placeholder="请选择科室">
+              <el-select v-model="valueZhiCeng" placeholder="请选择职称">
                 <el-option
                   v-for="item in optionsZhiCeng"
                   :key="item.value"
@@ -84,32 +84,32 @@
                 @selection-change="handleSelectionChange"
               >
                 <el-table-column type="selection" width="55"> </el-table-column>
-                <el-table-column prop="doctor_name" label="姓名" width="60">
+                <el-table-column prop="doctorName" label="姓名" width="100">
                   <template slot-scope="scope">
                     <el-popover trigger="hover" placement="top">
-                      <p>用户名: {{ scope.row.doctor_name }}</p>
-                      <p>电话: {{ scope.row.doctor_name }}</p>
+                      <p>用户名: {{ scope.row.doctorName }}</p>
+                      <p>电话: {{ scope.row.doctorTel }}</p>
                       <div slot="reference" class="name-wrapper">
-                        <el-tag size="medium">{{ scope.row.doctor_name }}</el-tag>
+                        <el-tag size="medium">{{ scope.row.doctorName }}</el-tag>
                       </div>
                     </el-popover>
                   </template>
                 </el-table-column>
-                <el-table-column width="120" prop="doctor_tel" label="电话">
+                <el-table-column width="120" prop="doctorTel" label="电话">
                 </el-table-column>
-                <el-table-column width="120" prop="doctor_hospital" label="医院">
+                <el-table-column width="120" prop="doctorHospital" label="医院">
                 </el-table-column>
-                <el-table-column width="130" prop="doctor_keshi" label="科室">
+                <el-table-column width="130" prop="doctorKeshi" label="科室">
                 </el-table-column>
-                <el-table-column width="130" prop="doctor_zhiceng" label="职称">
+                <el-table-column width="130" prop="doctorZhiceng" label="职称">
                 </el-table-column>
-                <el-table-column width="130" prop="doctor_addtime" label="加入时间">
+                <el-table-column width="130" prop="doctorAddtime" label="加入时间">
                 </el-table-column>
-                <el-table-column width="130" prop="doctor_status" label="审核状态">
+                <el-table-column width="130" prop="doctorStatus" label="审核状态">
                 </el-table-column>
-                <el-table-column width="100" prop="doctor_service_status" label="服务审核">
+                <el-table-column width="100" prop="doctorServiceStatus" label="服务审核">
                 </el-table-column>
-                <el-table-column width="100" prop="doctor_fansNumber" label="粉丝">
+                <el-table-column width="100" prop="doctorFansnumber" label="粉丝">
                 </el-table-column>
                 <el-table-column width="" prop="address" label="操作">
                   <template slot-scope="scope">
@@ -131,7 +131,7 @@
                       <el-button
                         type="text"
                         size="medium"
-                        @click="deletSingalClick(scope.row.userId)"
+                        @click="deletSingalClick(scope.row.doctorId)"
                       >删除</el-button
                       >
                     </div>
@@ -176,12 +176,11 @@
 <script>
 // 导入删除用户的删除信息接口
 import {
-  deleteAllUser,
-  deletSingalUser,
-  openOrClose,
-  getOneUserInfo,
-  getAllUserInfo
-} from "@/network/user";
+  deleteAllDoctor,
+  deletSingalDoctor,
+  getOneDoctorInfo,
+  getAllDoctorInfo
+} from "@/network/doctor";
 
 export default {
   name: "DoctorList",
@@ -204,7 +203,7 @@ export default {
       ],
       // 多选所要用到的数组
       multipleSelection: [], // 多选中后的数据是那些
-      currentPage: 6, // 当前页码
+      currentPage: 1, // 当前页码
       pageSize: 10, // 每页大小
       total: 10, // 总页数
       value2: "", // 获取筛选时间值
@@ -228,27 +227,31 @@ export default {
       }],
       valueKeshi: '', //  选中的哪个值 optionsZhiCeng
       optionsZhiCeng: [{
-        value: '内分泌科',
-        label: '内分泌科'
+        value: '主任医师',
+        label: '主任医师'
       }, {
-        value: '内科',
-        label: '内科'
+        value: '副主任医师',
+        label: '副主任医师'
       }, {
-        value: '消化科',
-        label: '消化科'
+        value: '主治医师',
+        label: '主治医师'
       }, {
-        value: '儿科',
-        label: '儿科'
+        value: '住院医师',
+        label: '住院医师'
       }, {
-        value: '中医科',
-        label: '中医科'
-      }],
+        value: '药剂师',
+        label: '药剂师'
+      },{
+        value: '护师',
+        label: '护师'
+      }
+      ],
       valueZhiCeng: '' //  选中的哪个值 optionsZhiCeng
     };
   },
   created() {
     // 1.用户数据请求，满足
-    getAllUserInfo({
+    getAllDoctorInfo({
       currentPage: this.currentPage,
       pageSize: this.pageSize
     }).then(res => {
@@ -267,11 +270,12 @@ export default {
     },
     // 复选框选中之后和没有被选中时候发生变化
     handleSelectionChange(val) {
+      console.log(val);
       // 1 装选中的Id
       let selectId = [];
       // 2 循环添加对应的Id号
       for (let index = 0; index < val.length; index++) {
-        selectId.push(val[index].userId);
+        selectId.push(val[index].doctorId);
       }
       // 3 将循环得到得Id值进行赋值
       this.multipleSelection = selectId;
@@ -289,7 +293,7 @@ export default {
       };
       console.log(keywords);
       // 请求数据API
-      getOneUserInfo(keywords)
+      getOneDoctorInfo(keywords)
         .then((res) => {
           if(res.data[0] === null) {
             this.$toast({ text: "请稍等...", type: "info", duration: 2000 });
@@ -339,7 +343,7 @@ export default {
       }).then(() => {
         console.log("点击确认");
         // 1 点击确定后发送需要删除的信息到后端
-        deleteAllUser(this.multipleSelection)
+        deleteAllDoctor(this.multipleSelection)
           .then((res) => {
             this.$message({
               message: "删除成功！",
@@ -360,6 +364,7 @@ export default {
     },
     // 删除单个用户数据
     deletSingalClick(userId) {
+      console.log(userId);
       this.$confirm("确定要删除这条数据吗？", "删除数据", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -367,7 +372,7 @@ export default {
       })
         .then(() => {
           // 传递数据到后端
-          deletSingalUser({
+          deletSingalDoctor({
             deleteId: userId,
           })
             .then((data) => {
@@ -399,7 +404,7 @@ export default {
     getSuccessInfo(size,currentPage){
       console.log(currentPage);
       const data = {pageSize: size, currentPage: currentPage};
-      getAllUserInfo(data).then(res => {
+      getAllDoctorInfo(data).then(res => {
         console.log(res);
         this.tableData = res.data.userList;
         this.total = res.data.pageLength;
