@@ -31,62 +31,29 @@
           <el-submenu index="5">
             <template slot="title"><i class="el-icon-setting"></i>财务管理</template>
             <el-menu-item-group>
-              <template slot="title">分组一</template>
-              <el-menu-item index="3-1">选项1</el-menu-item>
-              <el-menu-item index="3-2">选项2</el-menu-item>
+              <el-menu-item index="3-1" @click="transactionRecord()">交易记录</el-menu-item>
+              <el-menu-item index="3-2" @click="settlementRecord()">结算记录</el-menu-item>
+              <el-menu-item index="3-3" @click="transferRecords()">转账记录</el-menu-item>
             </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-              <el-menu-item index="3-3">选项3</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="3-4">
-              <template slot="title">选项4</template>
-              <el-menu-item index="3-4-1">选项4-1</el-menu-item>
-            </el-submenu>
           </el-submenu>
           <el-submenu index="6">
             <template slot="title"><i class="el-icon-setting"></i>商品管理</template>
             <el-menu-item-group>
-              <template slot="title">分组一</template>
-              <el-menu-item index="3-1">选项1</el-menu-item>
-              <el-menu-item index="3-2">选项2</el-menu-item>
+              <el-menu-item index="3-1" @click="drugList()">药品列表</el-menu-item>
+              <el-menu-item index="3-1" @click="drugclassification()">药品分类</el-menu-item>
+              <el-menu-item index="3-1" @click="drugReview()">药品审核</el-menu-item>
             </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-              <el-menu-item index="3-3">选项3</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="3-4">
-              <template slot="title">选项4</template>
-              <el-menu-item index="3-4-1">选项4-1</el-menu-item>
-            </el-submenu>
           </el-submenu>
           <el-submenu index="7">
             <template slot="title"><i class="el-icon-setting"></i>用户权限管理</template>
             <el-menu-item-group>
-              <template slot="title">分组一</template>
-              <el-menu-item index="3-1">选项1</el-menu-item>
-              <el-menu-item index="3-2">选项2</el-menu-item>
+              <el-menu-item index="3-1" @click="memberManagment()">成员管理</el-menu-item>
+              <el-menu-item index="3-2" @click="roleManagment()">角色管理</el-menu-item>
             </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-              <el-menu-item index="3-3">选项3</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="3-4">
-              <template slot="title">选项4</template>
-              <el-menu-item index="3-4-1">选项4-1</el-menu-item>
-            </el-submenu>
           </el-submenu>
           <el-submenu index="8">
             <template slot="title"><i class="el-icon-setting"></i>意见管理</template>
-            <el-menu-item-group>
-              <template slot="title">分组一</template>
-              <el-menu-item index="3-1">选项1</el-menu-item>
-              <el-menu-item index="3-2">选项2</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-              <el-menu-item index="3-3">选项3</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="3-4">
-              <template slot="title">选项4</template>
-              <el-menu-item index="3-4-1">选项4-1</el-menu-item>
-            </el-submenu>
+            <el-menu-item index="3-2" @click="suggestions()">意见管理</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-aside>
@@ -121,35 +88,71 @@
       },
       // 3 点击跳转到医生服务
       doctorServiceHandleClick() {
-        this.routerUrl = 'doctorservice'
+        this.routerUrl = 'doctorservice';
       },
       // 4 点击跳转到医生服务审核
       doctorServiceReviewClick() {
-        this.routerUrl = 'doctorservicereview'
+        this.routerUrl = 'doctorservicereview';
       },
       // 5 点击跳转到处方管理
       prescriptHandleClick() {
-        this.routerUrl = 'prescription'
+        this.routerUrl = 'prescription';
       },
       // 6 点击跳转到问诊单
       ordsQuestionnaire() {
-        this.routerUrl = 'questionnaire'
+        this.routerUrl = 'questionnaire';
       },
       // 7 挂号单管理
       ordsResgister() {
-
+        this.routerUrl = 'registeredorder';
       },
       // 8 药品订单管理
       ordsDrugs() {
-
+        this.routerUrl = 'drugordermanagement';
       },
       // 9 处方流转订单管理
       ordsPrescriptionReversal() {
-
+        this.routerUrl = 'prescriptionCirculationOrderManagement';
       },
       // 10 退款申请
       ordsRefund() {
-
+        this.routerUrl = 'refund';
+      },
+      // 1 交易记录
+      transactionRecord() {
+        this.routerUrl = 'transactionrecord';
+      },
+      // 2 交易记录
+      settlementRecord() {
+        this.routerUrl = 'settlementrecord';
+      },
+      // 3 转账记录
+      transferRecords() {
+        this.routerUrl = 'transferRecords';
+      },
+      // 1 药品列表管理
+      drugList() {
+        this.routerUrl = 'druglist';
+      },
+      // 2 药品分类管理
+      drugclassification() {
+        this.routerUrl = 'drugclassification';
+      },
+      // 3 药品审核管理
+      drugReview() {
+        this.routerUrl = 'drugReview';
+      },
+      // 1 成员管理
+      memberManagment() {
+        this.routerUrl = 'memberManagment';
+      },
+      // 2 成员管理
+      roleManagment() {
+        this.routerUrl = 'memberManagment';
+      },
+      // 意见管理
+      suggestions() {
+        this.routerUrl = 'suggestion'
       }
     }
   }
