@@ -119,7 +119,7 @@ const route = [
     component: MemberManagment
   },
   {
-    path: '/memberManagment',
+    path: '/roleManagment',
     component: RoleManagment
   },
   {
