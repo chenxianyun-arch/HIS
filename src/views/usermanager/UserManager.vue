@@ -118,9 +118,8 @@
                         size="medium"
                         >查看档案</el-button
                       >
-                      <el-button type="text" size="medium"
-                        >查看收货地址</el-button
-                      >
+                      <el-button @click="watchGoodsInfo" type="text" size="medium"
+                        >查看收货地址</el-button>
                       <el-button
                         type="text"
                         size="medium"
@@ -246,7 +245,7 @@ export default {
     // 点击查看编辑
     handleClick(row) {
       console.log(row);
-      // deleteUserInfo(this.deletSingalClick())
+      this.$router.push('/userdetailinfo');
     },
     // 复选框选中之后和没有被选中时候发生变化
     handleSelectionChange(val) {
@@ -388,6 +387,9 @@ export default {
       }).catch(err => {
         console.log(err);
       })
+    },
+    watchGoodsInfo() {
+      this.$router.push("/usergoodsinfo")
     }
   },
 };

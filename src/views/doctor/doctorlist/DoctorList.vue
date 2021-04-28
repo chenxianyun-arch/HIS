@@ -125,7 +125,7 @@
                         type="text"
                         size="medium">查看</el-button
                       >
-                      <el-button type="text" size="medium"
+                      <el-button  type="text" size="medium"
                       >查看粉丝</el-button
                       >
                       <el-button
@@ -266,7 +266,7 @@ export default {
     // 点击查看编辑
     handleClick(row) {
       console.log(row);
-      // deleteUserInfo(this.deletSingalClick())
+      this.$router.push('/doctordetailinfo');
     },
     // 复选框选中之后和没有被选中时候发生变化
     handleSelectionChange(val) {

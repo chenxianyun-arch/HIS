@@ -34,6 +34,10 @@ const RoleManagment = () => import('../views/roleManagment/RoleManagment');
 const Suggestion = () => import('../views/suggestion/Suggestion');
 const ForgetPwd = () => import('../views/forgetpwd/ForgetPwd');
 const Register = () => import('../views/register/Register');
+const UserDetailInfo = () => import('../views/usermanager/UserDetailInfo');
+const UserGoodsInfo = () => import('../views/usermanager/UserGoodsInfo');
+const DoctorDetailInfo = () => import('../views/doctor/DoctorDetailInfo');
+
 const route = [
   {
     path: '',
@@ -134,10 +138,20 @@ const route = [
   {
     path: '/register',
     component: Register
+  },
+  {
+    path: '/userdetailinfo',
+    component: UserDetailInfo
+  },
+  {
+    path: '/usergoodsinfo',
+    component: UserGoodsInfo
+  },
+  {
+    path: '/doctordetailinfo',
+    component: DoctorDetailInfo
   }
 ]
-
-
 
 const router = new VueRouter({
   routes: route,

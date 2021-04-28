@@ -67,7 +67,7 @@
 // 有关组件相关的
 import MatteMask from "@/components/common/mattemask/MatteMask";
 // 有关函数相关的
-import userInfoCheck from "@/network/login"
+import forgetCheckInfo from "@/network/forgetpwd"
 export default {
   name: "ForgetPwd",
   components:{
@@ -101,13 +101,9 @@ export default {
       //开启蒙版
       this.showToast = true
       //1.验证用户信息是否正确，实现登录验证
-      userInfoCheck({username: this.form.username, password: this.form.checkPwd})
+      forgetCheckInfo({username: this.form.username, password: this.form.password, role: this.value})
         .then(res => {
-          if(res === undefined){
-            this.setTimeOut2()
-          }else if(res.data === "登录成功"){
             this.setTimeOut1()
-          }
         })
         .catch(error => {
           console.log(error)
