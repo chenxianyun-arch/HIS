@@ -27,6 +27,17 @@
                     <i class="iconfont icon-mimalan"></i>
                     <input type="password" v-model="form.password" id="passwordInput" placeholder="请输入密码">
                   </div>
+                  <div class="select-item">
+                    <el-checkbox v-model="checked">记住密码</el-checkbox>
+                    <a href="/register">注册账号</a>
+                    <a href="/forgetpwd">忘记密码</a>
+                  </div>
+                  <div class="splice-line"></div>
+                  <div class="select-item">
+                    <el-radio v-model="selectRole" label="1">医生</el-radio>
+                    <el-radio v-model="selectRole" label="2">用户</el-radio>
+                    <el-radio v-model="selectRole" label="3">管理员</el-radio>
+                  </div>
                   <div class="submit">
                     <label for="login"></label>
                     <input type="button" name="login" @click="loginClick" value="登录" >
@@ -59,7 +70,9 @@
           username: '',
           password: ''
         },
-        showToast: false
+        showToast: false,//是否显示遮罩层
+        checked: false,
+        selectRole: 1
       }
     },
     methods:{
@@ -107,6 +120,14 @@
     background-color: #666ee8;
   }
 
+  .login-wrap form {
+    width: 100%;
+  }
+
+  .login-wrap .username input {
+    width: 100%;
+  }
+
   .login-wrap .login-container {
     display: flex;
     justify-content: space-between;
@@ -142,6 +163,12 @@
   .main {
     width: 100%;
     padding: 70px 50px;
+  }
+
+  .main .select-item {
+    width: 75%;
+    display: flex;
+    justify-content: space-between;
   }
 
   .left {

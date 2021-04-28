@@ -6,14 +6,13 @@
 @Author: chenxy
 @Update: 2021年2月24日22:18:10
 -->
-
 <template>
   <!-- 用户管理主要内容 -->
   <div class="container">
     <!-- 主要内容-->
     <div class="main">
       <!-- 标题 -->
-      <h2>成员管理</h2>
+      <h2>角色管理</h2>
       <!-- 筛选列表 -->
       <div class="select-list">
         <div class="list-item">

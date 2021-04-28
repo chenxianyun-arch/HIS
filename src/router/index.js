@@ -32,7 +32,8 @@ const DrugReview = () => import('../views/drugreview/DrugReview');
 const MemberManagment = () => import('../views/memberManagment/MemberManagment');
 const RoleManagment = () => import('../views/roleManagment/RoleManagment');
 const Suggestion = () => import('../views/suggestion/Suggestion');
-
+const ForgetPwd = () => import('../views/forgetpwd/ForgetPwd');
+const Register = () => import('../views/register/Register');
 const route = [
   {
     path: '',
@@ -125,6 +126,14 @@ const route = [
   {
     path: '/suggestion',
     component: Suggestion
+  },
+  {
+    path: '/forgetpwd',
+    component: ForgetPwd
+  },
+  {
+    path: '/register',
+    component: Register
   }
 ]
 
