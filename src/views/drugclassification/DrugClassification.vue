@@ -94,13 +94,6 @@
                         }}</el-tag>
                       </div>
                     </el-popover>
-                    <!--                    yaopinBeizhu: "备注内容"
-                                            yaopinDate: "2021-03-18"
-                                            yaopinId: 1
-                                            yaopinJibie: "一级"
-                                            yaopinName: "呼吸系统用药"
-                                            yaopinShangchuan: "admin"
-                                            yaopinState: "显示"-->
                   </template>
                 </el-table-column>
                 <el-table-column width="150" prop="yaopinJibie" label="级别">
@@ -127,17 +120,14 @@
                         >新增下级</el-button
                       >
                       <el-button
-                        @click="handleClick(scope.row)"
+                        @click="handleClickDown(scope.row)"
                         type="text"
-                        size="medium"
-                        >查看下级</el-button
-                      >
+                        size="medium">查看下级</el-button>
                       <el-button
                         @click="handleClick(scope.row)"
                         type="text"
                         size="medium"
-                        >编辑</el-button
-                      >
+                        >编辑</el-button>
                       <el-button
                         @click="handleClick(scope.row)"
                         type="text"
@@ -238,6 +228,9 @@ export default {
     // 点击查看编辑
     handleClick(row) {
       console.log(row);
+    },
+    handleClickDown() {
+      this.$router.push('/drugclassificationInfo');
     },
     // 复选框选中之后和没有被选中时候发生变化
     handleSelectionChange(val) {

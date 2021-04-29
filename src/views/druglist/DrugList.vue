@@ -92,14 +92,7 @@
                         <el-tag size="medium">{{ scope.row.medecineName }}</el-tag>
                       </div>
                     </el-popover>
-                    <!--                    medecineId: 1
-                                            medecineName: "络活喜苯磺酸安陆的平片"
-                                            medecinePicture: "无"
-                                            medecinePrice: 13
-                                            medecineShangjia: false
-                                            medecineSize: 100
-                                            medecineState: ""
-                                            medecineTime: "2021-03-18"-->`
+
                   </template>
                 </el-table-column>
                 <el-table-column width="150" prop="medecinePicture" label="列表图">
@@ -119,23 +112,6 @@
                     </el-switch>
                   </template>
                 </el-table-column>
-                <el-table-column width="200" prop="medecineState" label="审核状态">
-                  <template slot-scope="scope">
-                    <div
-                      style="
-                        display: flex;
-                        justify-content: space-between;
-                        flex-wrap: nowrap;
-                      "
-                    >
-                      <el-button
-                        @click="handleClick(scope.row)"
-                        type="text"
-                        size="medium">查看详情</el-button
-                      >
-                    </div>
-                  </template>
-                </el-table-column>
                 <el-table-column width="100" prop="medecineTime" label="发布时间">
                 </el-table-column>
                 <el-table-column width="200" prop="refundState" label="操作">
@@ -150,9 +126,8 @@
                       <el-button
                         @click="handleClick(scope.row)"
                         type="text"
-                        size="medium">查看</el-button
-                      >
-                      <el-button type="text" size="medium"
+                        size="medium">查看</el-button>
+                      <el-button @click="handleClicbtn" type="text" size="medium"
                       >编辑</el-button
                       >
                       <el-button
@@ -252,7 +227,10 @@ export default {
   methods: {
     // 点击查看编辑
     handleClick(row) {
-      console.log(row);
+      this.$router.push('/druglistinfo');
+    },
+    handleClicbtn() {
+      this.$router.push('/druglistbianji');
     },
     // 复选框选中之后和没有被选中时候发生变化
     handleSelectionChange(val) {

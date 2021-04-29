@@ -95,12 +95,6 @@
                         }}</el-tag>
                       </div>
                     </el-popover>
-                    <!--                    memberId: 1224
-                                            memberName: "赵霞"
-                                            memberPhone: "18284323804"
-                                            memberRole: "管理员"
-                                            memberState: 1
-                                            memberTime: "2021-03-25"-->
                   </template>
                 </el-table-column>
                 <el-table-column width="150" prop="memberName" label="真实姓名">
@@ -128,13 +122,13 @@
                         @click="handleClick(scope.row)"
                         type="text"
                         size="medium"
-                        >查看</el-button
+                        >编辑</el-button
                       >
                       <el-button
-                        @click="handleClick(scope.row)"
+                        @click="handleClick1(scope.row)"
                         type="text"
                         size="medium"
-                        >审核</el-button
+                        >删除</el-button
                       >
                     </div>
                   </template>
@@ -226,9 +220,14 @@ export default {
       });
   },
   methods: {
+    //
+    handleClick1() {
+      this.$router.push('/memberinfo');
+    },
     // 点击查看编辑
     handleClick(row) {
       console.log(row);
+      this.$router.push('/memberinfo');
     },
     // 复选框选中之后和没有被选中时候发生变化
     handleSelectionChange(val) {

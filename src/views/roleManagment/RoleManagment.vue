@@ -92,12 +92,6 @@
                         <el-tag size="medium">{{ scope.row.roleName }}</el-tag>
                       </div>
                     </el-popover>
-                    <!-- 
-                          roleDesc: "具备所有权限"
-                          roleId: 23424
-                          roleName: "管理员"
-                          roleState: "是"
-                          roleTime: "2021-03-19" -->
                   </template>
                 </el-table-column>
                 <el-table-column width="150" prop="roleDesc" label="描述">
@@ -220,6 +214,7 @@ export default {
     // 点击查看编辑
     handleClick(row) {
       console.log(row);
+      this.$router.push('/memberadd')
     },
     // 复选框选中之后和没有被选中时候发生变化
     handleSelectionChange(val) {

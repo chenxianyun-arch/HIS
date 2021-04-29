@@ -94,14 +94,6 @@
                         }}</el-tag>
                       </div>
                     </el-popover>
-                    <!--                    shenheId: 22323
-                                            shenheKucun: "100"
-                                            shenheName: "络活喜苯磺酸氨氯地平片"
-                                            shenhePicture: "无"
-                                            shenhePrice: 25
-                                            shenheState: "未上架"
-                                            shenheTime: "2021-03-21T14:34:57.000+00:00"
-                                            shenheZhuangtai: "待审核"-->
                   </template>
                 </el-table-column>
                 <el-table-column
@@ -144,11 +136,10 @@
                         >查看</el-button
                       >
                       <el-button
-                        @click="handleClick(scope.row)"
+                        @click="handleClick2(scope.row)"
                         type="text"
                         size="medium"
-                        >审核</el-button
-                      >
+                        >审核</el-button>
                     </div>
                   </template>
                 </el-table-column>
@@ -241,9 +232,13 @@ export default {
       });
   },
   methods: {
+    handleClick2() {
+      this.$router.push('/drugshenheinfo');
+    },
     // 点击查看编辑
     handleClick(row) {
       console.log(row);
+      this.$router.push('/drugreviewinfo');
     },
     // 复选框选中之后和没有被选中时候发生变化
     handleSelectionChange(val) {

@@ -1,8 +1,9 @@
+
 <!--
-@Desc: 医生列表组件，展示医生列表组件的一些信息
-@Date: 2021年2月24日22:18:02
+@Desc: 医生查看粉丝数量
+@Date: 2021年4月29日09:05:48
 @Author: chenxy
-@Update: 2021年2月24日22:18:10
+@Update:
 -->
 
 <template>
@@ -11,19 +12,19 @@
     <!-- 主要内容-->
     <div class="main">
       <!-- 标题 -->
-      <h2>处方扭转订单管理</h2>
+      <h2>粉丝</h2>
+      <div style="position: absolute; right: 131px; top: 1px"><el-button type="primary" @click="backBtn">返回</el-button></div>
       <!-- 筛选列表 -->
       <div class="select-list">
         <div class="list-item">
           <i class="icon-select">
-            <img src="../../assets/usermanager/menu.png" alt="分类图片"/>
+            <img src="../../../assets/usermanager/menu.png" alt="分类图片"/>
           </i>
           <span class="item-info">筛选</span>
         </div>
         <div class="select-wrap">
           <!-- 中间的列表盒子 -->
           <div class="select-box">
-            <!--  选择问诊方式 -->
             <div>
               <el-input
                 placeholder="请输入姓名/ID号"
@@ -32,26 +33,16 @@
               >
               </el-input>
             </div>
-            <!-- 开始时间 -->
             <div class="block">
-              <span class="demonstration">开始时间</span>
+              <span class="demonstration">选择时间</span>
               <el-date-picker
-                v-model="startDate"
+                v-model="value2"
                 type="date"
-                placeholder="开始时间"
+                placeholder="选择日期"
               >
               </el-date-picker>
             </div>
-            <!-- 结束时间 -->
-            <div class="block">
-              <span class="demonstration">结束时间</span>
-              <el-date-picker
-                v-model="endDate"
-                type="date"
-                placeholder="结束时间"
-              >
-              </el-date-picker>
-            </div>
+            <!--           <div><span>注册时间</span>&nbsp; <input type="date" class="register-date"/></div>-->
             <div>
               <el-button type="primary" @click="btnClick">筛选</el-button>
             </div>
@@ -62,9 +53,9 @@
       <div class="select-list select-user">
         <div class="list-item list-reset">
           <i class="icon-select icon-reset"
-          ><img src="../../assets/usermanager/menu.png" alt="分类图片"
+          ><img src="../../../assets/usermanager/menu.png" alt="分类图片"
           /></i>
-          <span class="item-info">医生列表</span>
+          <span class="item-info">用户列表</span>
           <div class="message"></div>
           <div class="qun-message"></div>
           <div class="app-message"></div>
@@ -72,7 +63,7 @@
         <div class="list-box">
           <!-- 中间的列表盒子 -->
           <div class="select-box">
-            <!-- 医生列表区域 -->
+            <!-- 用户列表区域 -->
             <div class="table">
               <el-table
                 ref="multipleTable"
@@ -82,81 +73,23 @@
                 @selection-change="handleSelectionChange"
               >
                 <el-table-column type="selection" width="55"> </el-table-column>
-                <el-table-column prop="reverseId" label="订单编号" width="100">
+                <el-table-column prop="name" label="用户名" width="180">
                   <template slot-scope="scope">
                     <el-popover trigger="hover" placement="top">
-                      <p>用户名: {{ scope.row.reverseId }}</p>
-                      <p>电话: {{ scope.row.reverseId }}</p>
+                      <p>用户名: {{ scope.row.name }}</p>
+                      <p>电话: {{ scope.row.address }}</p>
                       <div slot="reference" class="name-wrapper">
-                        <el-tag size="medium">{{ scope.row.reverseId }}</el-tag>
+                        <el-tag size="medium">{{ scope.row.name }}</el-tag>
                       </div>
                     </el-popover>
                   </template>
+                </el-table-column>
+                <el-table-column width="140" prop="phone" label="电话">
+                </el-table-column>
+                <el-table-column prop="time" label="加入时间" width="170">
+                </el-table-column>
 
-                </el-table-column>
-                <el-table-column width="120" prop="prescriptionNumber" label="处方编号">
-                </el-table-column>
-                <el-table-column width="120" prop="patient" label="患者">
-                </el-table-column>
-                <el-table-column width="130" prop="keshi" label="科室">
-                </el-table-column>
-                <el-table-column width="130" prop="doctor" label="医生">
-                </el-table-column>
-                <el-table-column width="130" prop="price" label="费用">
-                </el-table-column>
-                <el-table-column width="130" prop="orderState" label="订单状态">
-                </el-table-column>
-                <el-table-column width="130" prop="chufangState" label="处方单状态">
-                </el-table-column>
-                <el-table-column width="130" prop="payWay" label="购药方式">
-                </el-table-column>
-                <el-table-column width="130" prop="fayaoState" label="发药方式">
-                </el-table-column>
-                <el-table-column width="" prop="address" label="操作">
-                  <template slot-scope="scope">
-                    <div
-                      style="
-                        display: flex;
-                        justify-content: space-between;
-                        flex-wrap: nowrap;
-                      "
-                    >
-                      <el-button
-                        @click="handleClick(scope.row)"
-                        type="text"
-                        size="medium">查看订单</el-button
-                      >
-                    </div>
-                  </template>
-                </el-table-column>
               </el-table>
-            </div>
-          </div>
-          <!-- 底部的删除全部按钮和分页插件 -->
-          <div class="page-plugin">
-            <!-- 删除全部 -->
-            <div
-              class="deleteall"
-              style="position: relative; right: 0; height: 50px"
-            >
-              <el-button
-                style="float: left; margin-top: 10px"
-                @click="deletClick"
-              >删除已选</el-button>
-            </div>
-            <!-- 分页插件 -->
-            <div style="display: flex; justify-content: center">
-              <el-pagination
-                background
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage"
-                :page-sizes="[10, 15, 20, 25]"
-                :page-size="pageSize"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="total"
-              >
-              </el-pagination>
             </div>
           </div>
         </div>
@@ -168,45 +101,68 @@
 <script>
 // 导入删除用户的删除信息接口
 import {
-  deleteAllDoctor,
-  deletSingalDoctor,
-  getOneDoctorInfo,
-  getAllDoctorInfo
-} from "@/network/prescriptions";
+  deleteAllUser,
+  deletSingalUser,
+  openOrClose,
+  getOneUserInfo,
+  getAllUserInfo
+} from "@/network/user";
 
 export default {
-  name: "DoctorList",
+  name: "UserManager",
   data() {
     return {
       // 列表数据
       tableData: [
         {
-          chufangState: "易购就买",
-          doctor: "钟南山",
-          fayaoState: "3313",
-          keshi: "儿科",
-          orderState: "已发货",
-          patient: "田田",
-          payWay: "133",
-          prescriptionNumber: 33,
-          price: 13,
-          reverseId: 1,
-          reverseNumber: 12,
-        }
+          userId: 3,
+          date: "2016-05-02",
+          name: "李小明",
+          time: "2020-7-21",
+          phone: "18381911292",
+          // 是否开启账号
+          value: false,
+        },
+        {
+          userId: 2,
+          date: "2016-05-04",
+          name: "王小虎",
+          time: "2020-7-21",
+          phone: "18381911292",
+          // 是否开启账号
+          value: false,
+        },
+        {
+          userId: 6,
+          date: "2016-05-01",
+          name: "黄梅梅",
+          time: "2020-7-21",
+          phone: "18381911292",
+          // 是否开启账号
+          value: false,
+        },
+        {
+          userId: 4,
+          date: "2016-05-03",
+          name: "王二丫",
+          time: "2020-7-21",
+          phone: "18381911292",
+          // 是否开启账号
+          value: true,
+        },
       ],
       // 多选所要用到的数组
       multipleSelection: [], // 多选中后的数据是那些
-      currentPage: 1, // 当前页码
+      currentPage: 6, // 当前页码
       pageSize: 10, // 每页大小
       total: 10, // 总页数
-      startDate: "", // 开始时间
-      endDate: "",   // 结束时间,
-      elInput: ''
+      value2: "", // 获取筛选时间值
+      elInput: "", // 获取关键值
     };
   },
   created() {
     // 1.用户数据请求，满足
-    getAllDoctorInfo({
+    getAllUserInfo({
       currentPage: this.currentPage,
       pageSize: this.pageSize
     }).then(res => {
@@ -218,18 +174,22 @@ export default {
     })
   },
   methods: {
+    // 返回按钮
+    backBtn() {
+      this.$router.back();
+    },
     // 点击查看编辑
     handleClick(row) {
-      this.$router.push('/prescriptioninfo')
+      console.log(row);
+      this.$router.push('/userdetailinfo');
     },
     // 复选框选中之后和没有被选中时候发生变化
     handleSelectionChange(val) {
-      console.log(val);
       // 1 装选中的Id
       let selectId = [];
       // 2 循环添加对应的Id号
       for (let index = 0; index < val.length; index++) {
-        selectId.push(val[index].questionnaireId);
+        selectId.push(val[index].userId);
       }
       // 3 将循环得到得Id值进行赋值
       this.multipleSelection = selectId;
@@ -242,12 +202,11 @@ export default {
       // 将信息装入数组中，然后传给后端
       let keywords = {
         'keyName': this.elInput,
-        'startDate': Date.parse(this.startDate),
-        'endDate': Date.parse(this.endDate)
+        'keyDate': Date.parse(this.value2)
       };
       console.log(keywords);
       // 请求数据API
-      getOneDoctorInfo(keywords)
+      getOneUserInfo(keywords)
         .then((res) => {
           if(res.data[0] === null) {
             this.$toast({ text: "请稍等...", type: "info", duration: 2000 });
@@ -297,7 +256,7 @@ export default {
       }).then(() => {
         console.log("点击确认");
         // 1 点击确定后发送需要删除的信息到后端
-        deleteAllDoctor(this.multipleSelection)
+        deleteAllUser(this.multipleSelection)
           .then((res) => {
             this.$message({
               message: "删除成功！",
@@ -318,7 +277,6 @@ export default {
     },
     // 删除单个用户数据
     deletSingalClick(userId) {
-      console.log(userId);
       this.$confirm("确定要删除这条数据吗？", "删除数据", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -326,7 +284,7 @@ export default {
       })
         .then(() => {
           // 传递数据到后端
-          deletSingalDoctor({
+          deletSingalUser({
             deleteId: userId,
           })
             .then((data) => {
@@ -358,13 +316,16 @@ export default {
     getSuccessInfo(size,currentPage){
       console.log(currentPage);
       const data = {pageSize: size, currentPage: currentPage};
-      getAllDoctorInfo(data).then(res => {
+      getAllUserInfo(data).then(res => {
         console.log(res);
         this.tableData = res.data.userList;
         this.total = res.data.pageLength;
       }).catch(err => {
         console.log(err);
       })
+    },
+    watchGoodsInfo() {
+      this.$router.push("/usergoodsinfo")
     }
   },
 };
@@ -374,13 +335,15 @@ export default {
 .container {
   width: 100%;
   height: 100vh;
+  overflow-x: hidden;
 }
 
 .container .main {
+  position: relative;
   overflow-x: hidden;
   padding: 10px;
-  margin-right: 20px;
-  width: inherit;
+  margin-left: 40px;
+  width: 100%;
   height: 100%;
 }
 

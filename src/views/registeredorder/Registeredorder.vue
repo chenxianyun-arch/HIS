@@ -216,6 +216,7 @@ export default {
     // 点击查看编辑
     handleClick(row) {
       console.log(row);
+      this.$router.push('/registerdetaillinfo');
     },
     // 复选框选中之后和没有被选中时候发生变化
     handleSelectionChange(val) {

@@ -91,12 +91,6 @@
                         <el-tag size="medium">{{ scope.row.jiesuanDoctor }}</el-tag>
                       </div>
                     </el-popover>
-                    <!--                    jiesuanCard: "5103324243"
-                                            jiesuanDate: "2021-03-25"
-                                            jiesuanDoctor: "钟南山"
-                                            jiesuanId: 242
-                                            jiesuanPrice: 34
-                                            jiesuanState: "成功"-->
                   </template>
                 </el-table-column>
                 <el-table-column width="150" prop="jiesuanPrice" label="结算金额（税后）">
@@ -210,7 +204,7 @@ export default {
   methods: {
     // 点击查看编辑
     handleClick(row) {
-      console.log(row);
+      this.$router.push('/settlementrecordinfo');
     },
     // 复选框选中之后和没有被选中时候发生变化
     handleSelectionChange(val) {

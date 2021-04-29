@@ -120,9 +120,13 @@
                       <el-button
                         type="text"
                         size="medium"
+                        @click="centerDialogVisible = true"
+                      >订单发货</el-button>
+                      <el-button
+                        type="text"
+                        size="medium"
                         @click="deletSingalClick(scope.row.questionnaireId)"
-                      >订单发货</el-button
-                      >
+                      >删除</el-button>
                     </div>
                   </template>
                 </el-table-column>
@@ -155,6 +159,31 @@
               >
               </el-pagination>
             </div>
+            <div>
+              <el-dialog
+                title="发货"
+                :visible.sync="centerDialogVisible"
+                width="30%"
+                center>
+                <div>
+                  <span>配送方式：</span><el-select v-model="value" placeholder="请选择">
+                  <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
+                </div>
+                <div style="margin-top: 20px">
+                  <span>物流单号：</span><el-input v-model="input" placeholder="请输入内容" style="width: 220px" aria-placeholder="请输入物流单号"></el-input>
+                </div>
+                <span slot="footer" class="dialog-footer">
+          <el-button @click="centerDialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
+        </span>
+              </el-dialog>
+            </div>
           </div>
         </div>
       </div>
@@ -175,6 +204,8 @@ export default {
   name: "DoctorList",
   data() {
     return {
+      centerDialogVisible: false,
+      radio: '1',
       // 列表数据
       tableData: [
         {
@@ -193,7 +224,25 @@ export default {
       total: 10, // 总页数
       startDate: "", // 开始时间
       endDate: "",   // 结束时间,
-      elInput: ''
+      elInput: '',
+      options: [{
+        value: '顺丰',
+        label: '顺丰'
+      }, {
+        value: '圆通',
+        label: '圆通'
+      }, {
+        value: '韵达',
+        label: '韵达'
+      }, {
+        value: '中通',
+        label: '中通'
+      }, {
+        value: '申通',
+        label: '申通'
+      }],
+      value: '',
+      input: ''
     };
   },
   created() {
@@ -212,7 +261,7 @@ export default {
   methods: {
     // 点击查看编辑
     handleClick(row) {
-      console.log(row);
+      this.$router.push("/drugOrderdetailinfo");
     },
     // 复选框选中之后和没有被选中时候发生变化
     handleSelectionChange(val) {

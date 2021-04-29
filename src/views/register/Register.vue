@@ -10,7 +10,6 @@
       <!--顶部图片-->
       <div class="topimg">
         <img src="../../assets/login/topimg.png" alt="爱心标记">
-        <!--        <img src="assets/login/topimg.png" alt="爱心标记">-->
       </div>
       <!--中间显示的具体内容-->
       <div class="login-container">

@@ -11,7 +11,7 @@
     <!-- 主要内容-->
     <div class="main">
       <!-- 标题 -->
-      <h2>医生列表</h2>
+      <h2>处方管理</h2>
       <!-- 筛选列表 -->
       <div class="select-list">
         <div class="list-item">
@@ -211,7 +211,7 @@ export default {
   methods: {
     // 点击查看编辑
     handleClick(row) {
-      console.log(row);
+      this.$router.push('/prescriptioninfo');
     },
     // 复选框选中之后和没有被选中时候发生变化
     handleSelectionChange(val) {

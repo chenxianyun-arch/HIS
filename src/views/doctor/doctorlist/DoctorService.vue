@@ -10,7 +10,7 @@
     <!-- 主要内容-->
     <div class="main">
       <!-- 标题 -->
-      <h2>医生管理界面</h2>
+      <h2>医生审核</h2>
       <!-- 筛选列表 -->
       <div class="select-list">
         <div class="list-item">
@@ -120,20 +120,39 @@
                         type="text"
                         size="medium">查看</el-button
                       >
-                      <el-button type="text" size="medium"
-                      >审核</el-button
-                      >
+                      <el-button @click="centerDialogVisible = true"  type="text" size="medium"
+                      >审核</el-button>
                       <el-button
                         type="text"
                         size="medium"
                         @click="deletSingalClick(scope.row.doctorId)"
-                      >删除</el-button
-                      >
+                      >删除</el-button>
                     </div>
                   </template>
                 </el-table-column>
               </el-table>
             </div>
+          </div>
+          <div>
+            <el-dialog
+              title="医生审核"
+              :visible.sync="centerDialogVisible"
+              width="30%"
+              center>
+              <p style="line-height: 30px">医生姓名: <span style="margin-left: 20px;">张三</span></p>
+              <div style="line-height: 30px">
+                <span style="margin-right: 20px">审核:</span>
+                <el-radio v-model="radio" label="1">审核通过</el-radio>
+                <el-radio v-model="radio" label="0">审核不通过</el-radio>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-top: 10px">
+                <span style="margin-right: 20px">备注</span><textarea style="border: 1px solid #000"  placeholder="请输入审核不通过的建议" cols="45" rows="10"></textarea>
+              </div>
+              <span slot="footer" class="dialog-footer">
+                <el-button @click="centerDialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
+              </span>
+            </el-dialog>
           </div>
           <!-- 底部的删除全部按钮和分页插件 -->
           <div class="page-plugin">
@@ -181,6 +200,8 @@ export default {
   name: "DoctorList",
   data() {
     return {
+      centerDialogVisible: false,
+      radio: '1',
       // 列表数据
       tableData: [
         {
@@ -260,8 +281,7 @@ export default {
   methods: {
     // 点击查看编辑
     handleClick(row) {
-      console.log(row);
-      // deleteUserInfo(this.deletSingalClick())
+      this.$router.push('/doctorwaitshenhe');
     },
     // 复选框选中之后和没有被选中时候发生变化
     handleSelectionChange(val) {

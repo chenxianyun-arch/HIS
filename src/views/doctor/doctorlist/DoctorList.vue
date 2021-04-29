@@ -125,7 +125,7 @@
                         type="text"
                         size="medium">查看</el-button
                       >
-                      <el-button  type="text" size="medium"
+                      <el-button @click="fansBtnClick"  type="text" size="medium"
                       >查看粉丝</el-button
                       >
                       <el-button
@@ -263,6 +263,10 @@ export default {
     })
   },
   methods: {
+    // 点击查看粉丝详情
+    fansBtnClick() {
+      this.$router.push('/doctorfansinfo')
+    },
     // 点击查看编辑
     handleClick(row) {
       console.log(row);

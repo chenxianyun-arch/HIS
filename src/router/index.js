@@ -36,7 +36,24 @@ const ForgetPwd = () => import('../views/forgetpwd/ForgetPwd');
 const Register = () => import('../views/register/Register');
 const UserDetailInfo = () => import('../views/usermanager/UserDetailInfo');
 const UserGoodsInfo = () => import('../views/usermanager/UserGoodsInfo');
-const DoctorDetailInfo = () => import('../views/doctor/DoctorDetailInfo');
+const DoctorDetailInfo = () => import('../views/doctor/doctordetail/DoctorDetailInfo');
+const DoctorFansInfo = () => import('../views/doctor/doctordetail/DoctorFansInfo');
+const DoctorWaitShenhe = () => import('../views/doctor/doctorshenhe/DoctorWaitShenhe');
+const DoctorServiceShenhe = () => import('../views/doctor/doctorshenhe/DoctorServiceShenhe');
+const PrescriptionInfo = () => import('../views/prescription/prescriptioninfo/PrescriptionInfo');
+const QuestionnaireTips = () => import('../views/ords/questionnairetips/QuestionnaireTips');
+const RegisterDetaillInfo = () => import('../views/registeredorder/registerorderinfo/RegisterDetaillInfo');
+const DrugOrderDetailInfo = () => import('../views/drugordermanagement/DrugOrderDetailInfo/DrugOrderDetailInfo');
+const RefundDetailInfo = () => import('../views/refund/RefundDetailInfo');
+const SettlementRecordInfo = () => import('../views/settlementrecord/SettlementRecordInfo');
+const DrugListInfo = () => import('../views/druglist/DrugListInfo');
+const DrugListBianji = () => import('../views/druglist/DrugListBianji');
+const DrugClassificationInfo = () => import('../views/drugclassification/drugclassifications/DrugClassificationInfo');
+const DrugReviewInfo = () => import('../views/drugreview/drugreviews/DrugReviewInfo');
+const DrugShenheInfo = () => import('../views/drugreview/drugreviews/DrugShenheInfo');
+const MemberInfo = () => import('../views/memberManagment/memeberinfo/MemberInfo');
+const MemberAdd = () => import('../views/memberManagment/memeberinfo/MemberAdd');
+
 
 const route = [
   {
@@ -150,6 +167,70 @@ const route = [
   {
     path: '/doctordetailinfo',
     component: DoctorDetailInfo
+  },
+  {
+    path: '/doctorfansinfo',
+    component: DoctorFansInfo
+  },
+  {
+    path: '/doctorwaitshenhe',
+    component: DoctorWaitShenhe
+  },
+  {
+    path: '/doctorServiceShenhe',
+    component: DoctorServiceShenhe
+  },
+  {
+    path: '/prescriptioninfo',
+    component: PrescriptionInfo
+  },
+  {
+    path: '/questionnairetips',
+    component: QuestionnaireTips
+  },
+  {
+    path: '/registerdetaillinfo',
+    component: RegisterDetaillInfo
+  },
+  {
+    path: '/drugOrderdetailinfo',
+    component: DrugOrderDetailInfo
+  },
+  {
+    path: '/refunddetailinfo',
+    component: RefundDetailInfo
+  },
+  {
+    path: '/settlementrecordinfo',
+    component: SettlementRecordInfo
+  },
+  {
+    path: '/druglistinfo',
+    component: DrugListInfo
+  },
+  {
+    path: '/druglistbianji',
+    component: DrugListBianji
+  },
+  {
+    path: '/drugclassificationInfo',
+    component: DrugClassificationInfo
+  },
+  {
+    path: '/drugreviewinfo',
+    component: DrugReviewInfo
+  },
+  {
+    path: '/drugshenheinfo',
+    component: DrugShenheInfo
+  },
+  {
+    path: '/memberinfo',
+    component: MemberInfo
+  },
+  {
+    path: '/memberadd',
+    component: MemberAdd
   }
 ]
 
